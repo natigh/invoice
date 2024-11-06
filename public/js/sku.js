@@ -1,4 +1,4 @@
-function changeStatusObject(idObject){
+function changeStatusSku(idSku){
     Swal.fire({
         title: "Would you like to Change Status?",
         icon: "warning",
@@ -18,11 +18,11 @@ function changeStatusObject(idObject){
                     $.ajax({
                         type: "post",
                         //llamar la constante creada en header con el enrutamiento
-                        url: url + "objects/changeObjectStatus",
-                        data: { idObject }
+                        url: url + "sku/changeStatusSku",
+                        data: { idSku }
                     }).done(function(result){
                         console.log("DONE? : ", result);
-                        window.location.href = url + "objects/viewObjects"
+                        window.location.href = url + "sku/viewSku"
                         window.location.reload()
                     }).fail(function(error){
                         console.log("ERROR? : ", error);
@@ -35,23 +35,26 @@ function changeStatusObject(idObject){
 
 }
 
-function dataObject(idObject) {
+function dataSku(idSku, idPrice) {
     $.ajax({
         type: "post",
         //llamar la constante creada en header con el enrutamiento
-        url: url + "objects/viewObjectById",
-        data: { idObject }
+        url: url + "sku/viewSkuById",
+        data: { idSku, idPrice }
     }).done(function(result){
         console.log("DONE? : ", result);
         const sku=JSON.parse(result);
         console.log(sku);
+        document.getElementById("idSku").value=sku.idSku;
+        document.getElementById("idPrice").value=sku.idPrice;
         document.getElementById("txtCode").value=sku.code;
-        document.getElementById("txtObject").value=sku.object;
+        document.getElementById("txtSku").value=sku.sku;
         document.getElementById("txtdescription").value=sku.description || "";
-        document.getElementById("selPrice").value=sku.idPrice;
+        document.getElementById("txtPrice").value=sku.value;
         document.getElementById("txtStock").value=sku.stock;
         
-        console.log(document.getElementById("idObject"))
+        console.log(document.getElementById("idSku"))
+        console.log(document.getElementById("idPrice"))
         
     }).fail(function(error){
         console.log("ERROR? : ", error);

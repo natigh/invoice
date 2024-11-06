@@ -44,7 +44,7 @@
 
     <script src="<?php echo URL; ?>js/user.js"></script>
     <script src="<?php echo URL; ?>js/common.js"></script>
-    <script src="<?php echo URL; ?>js/object.js"></script>
+    <script src="<?php echo URL; ?>js/sku.js"></script>
     <!-- <script src="<?php echo URL;?>admin/vendors/jquery/dist/jquery.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"
         integrity="sha512-U6K1YLIFUWcvuw5ucmMtT9HH4t0uz3M366qrF5y4vnyH6dgDzndlcGvH/Lz5k8NFh80SN95aJ5rqGZEdaQZ7ZQ=="
@@ -113,10 +113,10 @@
                                 <?php } endif; ?>
                                 <li><a><span class="material-symbols-outlined" id="objectIcon">
                                             emoji_objects
-                                        </span> Objects Management <span class="fa fa-chevron-down"></span></a>
+                                        </span> Sku Management <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="<?php echo URL; ?>objects/viewObjects">View Objects</a></li>
-                                        <li><a href="<?php echo URL; ?>objects/registerObject">Register Object</a></li>
+                                        <li><a href="<?php echo URL; ?>sku/viewSku">View Sku</a></li>
+                                        <li><a href="<?php echo URL; ?>sku/registerSku">Register Sku</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-desktop"></i> UI Elements <span

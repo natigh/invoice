@@ -21,14 +21,6 @@
                 <!-- Smart Wizard -->
                 <div id="wizard" class="form_wizard wizard_horizontal">
                     <ul class="wizard_steps">
-                        <li>
-                            <a href="#step-1">
-                                <span class="step_no">1</span>
-                                <span class="step_descr">Step 1<br /><small>Add New Object</small></span>
-                            </a>
-                        </li>
-                        <li>
-
                             <form class="form-horizontal form-label-left" method="post">
                                 <div id="step-1">
                                     <div class="form-group row">
@@ -40,11 +32,11 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="">Object <span
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="">Sku <span
                                                 class="required">*</span></label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input type="text" id="txtObject" required="required" class="form-control"
-                                                name="txtObject" placeholder="Object Name">
+                                            <input type="text" id="txtSku" required="required" class="form-control"
+                                                name="txtSku" placeholder="Item Name">
                                         </div>
                                     </div>
 
@@ -52,8 +44,11 @@
                                         <label for=""
                                             class="col-form-label col-md-3 col-sm-3 label-align">Description</label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input id="txtdescription" class="form-control col" type="text"
-                                                name="txtdescription" placeholder="Description">
+                                            <textarea
+                                                class="form-control col" id="txtDescription"
+                                                rows="5" cols="50" name="txtDescription"
+                                                placeholder="Description"></textarea>
+
                                         </div>
                                     </div>
                                     <div class="form-group row">

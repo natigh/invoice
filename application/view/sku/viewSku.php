@@ -2,7 +2,7 @@
     <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Objects</h2>
+                <h2>Sku</h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
@@ -43,14 +43,14 @@
                                 </thead>
                                 <tbody>
                                     <?php 
-                                        foreach($objects as $value):
+                                        foreach($sku as $value):
                                     
                                     ?>
                                     <tr>
                                         <td><?php echo $value['code']; ?></td>
-                                        <td><?php echo $value['object']; ?></td>
+                                        <td><?php echo $value['sku']; ?></td>
                                         <td><?php echo $value['description']; ?></td>
-                                        <td><?php echo $value['idPrice']; ?></td>
+                                        <td><?php echo $value['value']; ?></td>
                                         <td><?php echo $value['stock']; ?></td>
                                         <td>
                                             <?php if($value['active']==1): ?>
@@ -63,11 +63,11 @@
                                         <td>
                                             <button type="button" class="btn btn-primary btn-xs" data-toggle="modal"
                                                 data-target="#modal-edit"
-                                                onclick="dataObject('<?php echo $value['idObject']; ?>')">
+                                                onclick="dataSku('<?php echo $value['idSku']; ?>', '<?php echo $value['idPrice']; ?>')">
                                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                             </button>
                                             <button type="button" class="btn btn-warning btn-xs"
-                                                onclick="changeStatusObject('<?php echo $value['idObject']; ?>')"><i
+                                                onclick="changeStatusSku('<?php echo $value['idSku']; ?>')"><i
                                                     class="fa fa-exchange" aria-hidden="true"></i>
                                             </button>
                                         </td>
@@ -92,43 +92,40 @@
                         </div>
                         <div class="modal-body">
                             <form method="post">
-                                <input type="hidden" name="idObject" id="idObject" />
+                                <input type="hidden" name="idSku" id="idSku" />
+                                <input type="hidden" name="idPrice" id="idPrice" />
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="">Code <span
                                             class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <input type="text" id="txtCode" name="txtCode" required="required"
-                                            class="form-control" placeholder="Object Code">
+                                            class="form-control" placeholder="Sku Code">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="">object <span
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="">Sku <span
                                             class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="txtObject" required="required" class="form-control"
-                                            name="txtObject" placeholder="Object Name">
+                                        <input type="text" id="txtSku" required="required" class="form-control"
+                                            name="txtSku" placeholder="Sku Name">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="" class="col-form-label col-md-3 col-sm-3 label-align">Description</label>
+                                    <label for=""
+                                        class="col-form-label col-md-3 col-sm-3 label-align">Description</label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input id="txtdescription" class="form-control col" type="text" name="txtdescription"
-                                            placeholder="Description">
+                                        <input id="txtdescription" class="form-control col" type="text"
+                                            name="txtdescription" placeholder="Description">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align">Price</label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <select class="form-control" name="selPrice" id="selPrice">
-                                            <option value="">choose option</option>
-                                            <?php foreach ($prices as $p): ?>
-                                            <option value="<?php echo $p['idPrice']; ?>">
-                                                <?php echo $p['idPrice']; ?></option>
-                                            <?php endforeach; ?>
-                                        </select>
+                                        <input id="txtPrice" class="form-control col" type="text" name="txtPrice"
+                                            placeholder="Price">
                                     </div>
-                                     
+                                </div>
                                 <div class="form-group row">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align">Stock</label>
                                     <div class="col-md-6 col-sm-6 ">
@@ -136,9 +133,12 @@
                                             placeholder="Stock">
                                     </div>
                                 </div>
+
+
                                 <div class="form-group row">
                                     <div class="col-md-9 col-sm-9 offset-md-3">
-                                        <button type="button" class="btn btn-primary" onclick="historyGoBack()">Cancel</button>
+                                        <button type="button" class="btn btn-primary"
+                                            onclick="historyGoBack()">Cancel</button>
                                         <button class="btn btn-warning" type="reset">Reset</button>
                                         <button type="submit" class="btn btn-info" name="btnSubmit">Submit</button>
                                     </div>

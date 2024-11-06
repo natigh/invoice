@@ -24,70 +24,60 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `people`
+-- Table structure for table `rol`
 --
 
-CREATE TABLE `people` (
-  `idPerson` int NOT NULL,
-  `Document` varchar(15) COLLATE utf8mb3_spanish2_ci DEFAULT NULL,
-  `Names` varchar(50) COLLATE utf8mb3_spanish2_ci DEFAULT NULL,
-  `Lastname` varchar(50) COLLATE utf8mb3_spanish2_ci DEFAULT NULL,
-  `Email` varchar(100) COLLATE utf8mb3_spanish2_ci DEFAULT NULL,
-  `Phone` varchar(15) COLLATE utf8mb3_spanish2_ci DEFAULT NULL,
-  `Address` varchar(50) COLLATE utf8mb3_spanish2_ci DEFAULT NULL,
-  `Gender` varchar(20) COLLATE utf8mb3_spanish2_ci DEFAULT NULL,
-  `Birthdate` date DEFAULT NULL,
-  `idTypeDocument` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish2_ci;
+CREATE TABLE rol(
+    idRol int AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    rol varchar(50) NOT NULL
+);
 
 --
--- Dumping data for table `people`
+-- Dumping data for table `rol`
 --
 
-INSERT INTO `people` (`idPerson`, `Document`, `Names`, `Lastname`, `Email`, `Phone`, `Address`, `Gender`, `Birthdate`, `idTypeDocument`) VALUES
-(1, '287193871', 'Daniel', 'Morales', 'b@h.com', '673256325', 'Calle siempre viva', 'Masculino', '1987-09-29', 1),
-(2, '34567', 'Juliancho', 'lkjhjkl', 'vallrack67@gmail.com', '3456789', 'sdfgt', 'male', '2024-10-22', 1),
-(4, '2654', 'Justin', 'Valencia', 'tostin@tostin.com', '312', 'addfd', 'male', '2024-10-17', 1);
+INSERT INTO rol (rol) VALUES ('Admin'), ('Seller');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `roles`
+-- Table structure for table `typedocument`
 --
 
-CREATE TABLE `roles` (
-  `idRol` int NOT NULL,
-  `rolDescription` varchar(20) COLLATE utf8mb3_spanish2_ci DEFAULT NULL,
-  `statusRol` tinyint DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish2_ci;
+CREATE TABLE typedocument(
+    idTypeDocument int AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    typeDocument varchar(30) NOT NULL
+);
 
 --
--- Dumping data for table `roles`
+-- Dumping data for table `typedocument`
 --
 
-INSERT INTO `roles` (`idRol`, `rolDescription`, `statusRol`) VALUES
-(1, 'Admin', 1),
-(2, 'Secretaria', 0);
+INSERT INTO typedocument (typeDocument) VALUES ('Cèdula de ciudadania'), ('Cèdula de Extanjeria'), ('Pasaporte'), ('NIT'), ('CUIT');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `typedocuments`
+-- Table structure for table `person`
 --
 
-CREATE TABLE `typedocuments` (
-  `idTypeDocument` int NOT NULL,
-  `Description` varchar(20) COLLATE utf8mb3_spanish2_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish2_ci;
+CREATE TABLE person(
+    idPerson int AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    name varchar (50) NOT NULL,
+    lastname varchar (50) NOT NULL,
+    typedocument int NOT NULL,
+    FOREIGN KEY (typedocument) REFERENCES typedocument(idTypeDocument)
+        ON DELETE restrict ON UPDATE cascade,
+    document int NOT NULL,
+    phone varchar(20),
+    Address varchar(100),
+    email varchar(50) NOT NULL,
+    birthdate date,
+    active tinyint NOT NULL
+);
+
 
 --
--- Dumping data for table `typedocuments`
---
-
-INSERT INTO `typedocuments` (`idTypeDocument`, `Description`) VALUES
-(1, 'Cédula'),
-(2, 'Pasaporte'),
-(3, 'PEP');
 
 -- --------------------------------------------------------
 
@@ -95,81 +85,130 @@ INSERT INTO `typedocuments` (`idTypeDocument`, `Description`) VALUES
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `idUser` int NOT NULL,
-  `userName` varchar(15) COLLATE utf8mb3_spanish2_ci DEFAULT NULL,
-  `PASSWORD` varchar(100) COLLATE utf8mb3_spanish2_ci DEFAULT NULL,
-  `statusUser` tinyint DEFAULT NULL,
-  `idPerson` int DEFAULT NULL,
-  `idRol` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish2_ci;
+CREATE TABLE users(
+    idUser int AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    username varchar (30) NOT NULL,
+    PASSWORD varchar (30) NOT NULL,
+    idRol int NOT NULL,
+     FOREIGN KEY (idRol) REFERENCES rol(idRol)
+        ON DELETE restrict ON UPDATE cascade,
+    active tinyint NOT NULL
+);
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `users`
+-- Table structure for table `currency`
 --
-
-INSERT INTO `users` (`idUser`, `userName`, `PASSWORD`, `statusUser`, `idPerson`, `idRol`) VALUES
-(1, 'Vallrack', 'eaf3c978f6741fd07c7412ec61785cd6165f28b3', 1, 1, 1),
-(2, NULL, '12', 1, 2, 1),
-(4, 'tostin', '12', 1, 4, 1);
-
---
--- Indexes for dumped tables
---
+CREATE TABLE currency(
+    idCurrency int AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    currency varchar(50) NOT NULL
+);
 
 --
--- Indexes for table `people`
+-- Dumping data for table `currency`
 --
-ALTER TABLE `people`
-  ADD PRIMARY KEY (`idPerson`);
+INSERT INTO currency (currency) VALUES ('COP'), ('USD'), ('EUR'), ('GBP'), ('CAD'), ('AUD');
+
+-- --------------------------------------------------------
+--
+-- Table structure for table `sku`
+--
+CREATE TABLE sku(
+    idSku int AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    code int NOT NULL,
+    sku varchar(100) NOT NULL,
+    description varchar(500),
+    stock int NOT NULL,
+    active tinyint NOT NULL
+);
 
 --
--- Indexes for table `roles`
+
+-- --------------------------------------------------------
 --
-ALTER TABLE `roles`
-  ADD PRIMARY KEY (`idRol`);
+--
+-- Table structure for table `price`
+--
+CREATE TABLE price(
+    idPrice int AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    idCurrency int NOT NULL,
+    FOREIGN KEY (idCurrency) REFERENCES currency(idCurrency)
+        ON DELETE restrict ON UPDATE cascade,
+    value int NOT NULL,
+    idSku int NOT NULL,
+    FOREIGN KEY(idSku) REFERENCES sku(idSku)
+	ON DELETE restrict ON UPDATE cascade
+
+);
 
 --
--- Indexes for table `typedocuments`
+-- --------------------------------------------------------
+--Table structure for table `typecustomer`
 --
-ALTER TABLE `typedocuments`
-  ADD PRIMARY KEY (`idTypeDocument`);
+CREATE TABLE typecustomer(
+    idTypeCustomer int AUTO_INCREMENT PRIMARY KEY,
+    typeCustomer varchar(30)
+);
 
 --
--- Indexes for table `users`
+-- Dumping data for table `typecustomer`
 --
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`idUser`);
+INSERT INTO typecustomer (typecustomer) VALUES ('PN-Minorista'), ('PN-Mayorista'), ('PN-Extranjera'), ('E-Minorista'), ('E-Mayorista'), ('E-Extranjera');
+--
+-- --------------------------------------------------------
+--Table structure for table `typeinvoice`
+--
+CREATE TABLE typeinvoice(
+    idTypeInvoice int AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    typeInvoice varchar(50) NOT NULL
+);
+
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Dumping data for table `typeinvoice`
+--
+INSERT INTO typeinvoice (typeinvoice) VALUES ('Persona natural'), ('Empresa'), ('Persona extranjera'), ('Empresa extranjera'), ('Vendedor local'), ('Vendedor Extranjero');
+
+-- --------------------------------------------------------
+--
+-- Table structure for table `invoice`
+--
+CREATE TABLE invoice(
+    idInvoice int AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    code int NOT NULL,
+    date DATE NOT NULL,
+    idPerson int NOT NULL,
+    FOREIGN KEY (idPerson) REFERENCES person(idPerson)
+        ON DELETE restrict ON UPDATE cascade,
+    idUser int NOT NULL,
+    FOREIGN KEY (idUser) REFERENCES users(idUser)
+        ON DELETE restrict ON UPDATE cascade,
+    typeCustomer int NOT NULL,
+    FOREIGN KEY (typeCustomer) REFERENCES typecustomer(idTypeCustomer)
+        ON DELETE restrict ON UPDATE cascade,
+    typeInvoice int NOT NULL,
+    FOREIGN KEY (typeInvoice) REFERENCES typeinvoice(idTypeInvoice),
+    remark varchar(200)
+);
+--
+-- --------------------------------------------------------
+--
+-- Table structure for table `iteminvoice`
+--
+CREATE TABLE iteminvoice(
+    idItemInvoice int AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    code int NOT NULL,
+    idSku int NOT NULL,
+    FOREIGN KEY (idSku) REFERENCES sku(idSku)
+        ON DELETE restrict ON UPDATE cascade,
+    idPrice int NOT NULL,
+    FOREIGN KEY (idPrice) REFERENCES price(idPrice)
+        ON DELETE restrict ON UPDATE cascade,
+    quantity int NOT NULL,
+    idInvoice int NOT NULL,
+    FOREIGN KEY (idInvoice) REFERENCES invoice(idInvoice)
+        ON DELETE restrict ON UPDATE cascade
+);
 --
 
---
--- AUTO_INCREMENT for table `people`
---
-ALTER TABLE `people`
-  MODIFY `idPerson` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `roles`
---
-ALTER TABLE `roles`
-  MODIFY `idRol` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `typedocuments`
---
-ALTER TABLE `typedocuments`
-  MODIFY `idTypeDocument` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `idUser` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
