@@ -40,7 +40,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="">object <span
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="">Object <span
                                                 class="required">*</span></label>
                                         <div class="col-md-6 col-sm-6 ">
                                             <input type="text" id="txtObject" required="required" class="form-control"
@@ -59,34 +59,28 @@
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align">Price</label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <select class="form-control" name="selPrice" id="selPrice">
-                                                <option value="">choose option</option>
-                                                <?php foreach ($price as $p): ?>
-                                                <option value="<?php echo $p['idPrice']; ?>">
-                                                    <?php echo $p['idPrice']; ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for=""
-                                                class="col-form-label col-md-3 col-sm-3 label-align">Stock</label>
-                                            <div class="col-md-6 col-sm-6 ">
-                                                <input id="txtStock" class="form-control col" type="number"
-                                                    name="txtStock" placeholder="Stock" required="required">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <div class="col-md-9 col-sm-9 offset-md-3">
-                                                <button type="button" class="btn btn-primary"
-                                                    onclick="historyGoBack()">Cancel</button>
-                                                <button class="btn btn-warning" type="reset">Reset</button>
-                                                <button type="submit" class="btn btn-info"
-                                                    name="btnSubmit">Submit</button>
-                                            </div>
+                                            <input id="txtPrice" class="form-control col" type="text" name="txtPrice"
+                                                placeholder="Price">
                                         </div>
                                     </div>
+
+                                    <div class="form-group row">
+                                        <label for="" class="col-form-label col-md-3 col-sm-3 label-align">Stock</label>
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <input id="txtStock" class="form-control col" type="number" name="txtStock"
+                                                placeholder="Stock" required="required">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-9 col-sm-9 offset-md-3">
+                                            <button type="button" class="btn btn-primary"
+                                                onclick="historyGoBack()">Cancel</button>
+                                            <button class="btn btn-warning" type="reset">Reset</button>
+                                            <button type="submit" class="btn btn-info" name="btnSubmit">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </form>
                 </div>
                 <!-- End SmartWizard Content -->
