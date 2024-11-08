@@ -109,6 +109,7 @@ class mdlPeople{
 
      public function updatePeople(){
         $sql= $this->db->prepare("UPDATE person SET typeDocument = ?, document = ?, name = ?,lastname = ?, email = ?, phone = ?, Address = ? WHERE idPerson = ?");
+
         $sql->bindParam(1, $this->typedocument);
         $sql->bindParam(2, $this->document);
         $sql->bindParam(3, $this->name);
@@ -121,5 +122,15 @@ class mdlPeople{
         $result = $sql->execute();
         return $result;
     } 
+
+    public function select($document) {
+        $sql = "SELECT idPerson, CONCAT(name,' ',lastname) AS fullname FROM person WHERE document = ?;";
+
+        $query = $this->db->prepare($sql);
+        $query->bindParam(1, $document);
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>

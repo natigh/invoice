@@ -92,6 +92,9 @@ CREATE TABLE users(
     idRol int NOT NULL,
      FOREIGN KEY (idRol) REFERENCES rol(idRol)
         ON DELETE restrict ON UPDATE cascade,
+    idPerson int NOT NULL,
+     FOREIGN KEY (idPerson) REFERENCES person(idPerson)
+        ON DELETE restrict ON UPDATE cascade,
     active tinyint NOT NULL
 );
 
@@ -102,7 +105,8 @@ CREATE TABLE users(
 --
 CREATE TABLE currency(
     idCurrency int AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    currency varchar(50) NOT NULL
+    currency varchar(50) NOT NULL,
+    active tinyint NOT NULL
 );
 
 --
@@ -157,20 +161,6 @@ CREATE TABLE typecustomer(
 INSERT INTO typecustomer (typecustomer) VALUES ('PN-Minorista'), ('PN-Mayorista'), ('PN-Extranjera'), ('E-Minorista'), ('E-Mayorista'), ('E-Extranjera');
 --
 -- --------------------------------------------------------
---Table structure for table `typeinvoice`
---
-CREATE TABLE typeinvoice(
-    idTypeInvoice int AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    typeInvoice varchar(50) NOT NULL
-);
-
-
---
--- Dumping data for table `typeinvoice`
---
-INSERT INTO typeinvoice (typeinvoice) VALUES ('Persona natural'), ('Empresa'), ('Persona extranjera'), ('Empresa extranjera'), ('Vendedor local'), ('Vendedor Extranjero');
-
--- --------------------------------------------------------
 --
 -- Table structure for table `invoice`
 --
@@ -187,8 +177,6 @@ CREATE TABLE invoice(
     typeCustomer int NOT NULL,
     FOREIGN KEY (typeCustomer) REFERENCES typecustomer(idTypeCustomer)
         ON DELETE restrict ON UPDATE cascade,
-    typeInvoice int NOT NULL,
-    FOREIGN KEY (typeInvoice) REFERENCES typeinvoice(idTypeInvoice),
     remark varchar(200)
 );
 --

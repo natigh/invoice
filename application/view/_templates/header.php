@@ -62,6 +62,10 @@
     #objectIcon {
       font-size: 1.5em;
     }
+
+    #btnCancel a {
+        color: white;
+    }
     </style>
 </head>
 
@@ -103,7 +107,7 @@
                                 <?php if($_SESSION['rol'] == 'Administrador'): { ?>
                                 <li><a><span class="material-symbols-outlined" id="usersIcon">
                                             group
-                                        </span> Users Management</a>
+                                        </span> USERS MANAGEMENT</a>
                                     <ul class="nav child_menu">
                                         <li><a href="<?php echo URL; ?>user/viewUsers">View Users</a></li>
                                         <li><a href="<?php echo URL; ?>user/registerUser">Register User</a>
@@ -113,30 +117,20 @@
                                 <?php } endif; ?>
                                 <li><a><span class="material-symbols-outlined" id="objectIcon">
                                             emoji_objects
-                                        </span> Sku Management <span class="fa fa-chevron-down"></span></a>
+                                        </span> SKU MANAGEMENT <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="<?php echo URL; ?>sku/viewSku">View Sku</a></li>
                                         <li><a href="<?php echo URL; ?>sku/registerSku">Register Sku</a></li>
                                     </ul>
                                 </li>
-                                <li><a><i class="fa fa-desktop"></i> UI Elements <span
-                                            class="fa fa-chevron-down"></span></a>
+                                <li><a><span class="material-symbols-outlined">
+                                receipt_long
+                            </span> INVOICING <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="general_elements.html">General Elements</a></li>
-                                        <li><a href="media_gallery.html">Media Gallery</a></li>
-                                        <li><a href="typography.html">Typography</a></li>
-                                        <li><a href="icons.html">Icons</a></li>
-                                        <li><a href="glyphicons.html">Glyphicons</a></li>
-                                        <li><a href="widgets.html">Widgets</a></li>
-                                        <li><a href="invoice.html">Invoice</a></li>
-                                        <li><a href="inbox.html">Inbox</a></li>
-                                        <li><a href="calendar.html">Calendar</a></li>
-                                    </ul>
-                                </li>
-                                <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="tables.html">Tables</a></li>
-                                        <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                                        <li><a href="<?php echo URL; ?>invoice/registerSale">Register Sales Invoice</a></li>
+                                        <li><a href="<?php echo URL; ?>invoice/registerPurchase">Register Purchase Invoice</a></li>
+                                        <li><a href="<?php echo URL; ?>invoice/viewHistorySales">History Sales Invoices</a></li>
+                                        <li><a href="<?php echo URL; ?>invoice/viewHistoryPurchases">History Purchase Invoices</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span

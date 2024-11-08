@@ -56,6 +56,5 @@ class mdlPrice{
         return $result;
     }
 
-
 }
 ?>

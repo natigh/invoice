@@ -69,8 +69,7 @@
 
                                     <div class="form-group row">
                                         <div class="col-md-9 col-sm-9 offset-md-3">
-                                            <button type="button" class="btn btn-primary"
-                                                onclick="historyGoBack()">Cancel</button>
+                                            <button id="btnCancel" type="button" class="btn btn-primary"><a href="<?php echo URL; ?>sku/viewSku">Cancel</a></button>
                                             <button class="btn btn-warning" type="reset">Reset</button>
                                             <button type="submit" class="btn btn-info" name="btnSubmit">Submit</button>
                                         </div>

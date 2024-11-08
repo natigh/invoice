@@ -35,5 +35,14 @@ class mdlCurrency{
         $query -> execute();
         return  $query -> fetch(PDO::FETCH_ASSOC);
     }
+
+    public function select() {
+        $sql = "SELECT idCurrency, currency FROM currency WHERE active = 1";
+
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>

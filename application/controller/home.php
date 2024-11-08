@@ -43,23 +43,23 @@ class Home extends Controller
                 timer: 1500})";
 
                  //revisar la validacion de los datos
-            if($validate==true){
-                // var_dump($validate);
-                // exit;
-                //activamos la sesion
-                $_SESSION['SESSION_START'] = true;
-                $error=false;
+                if($validate==true){
+                    // var_dump($validate);
+                    // exit;
+                    //activamos la sesion
+                    $_SESSION['SESSION_START'] = true;
+                    $error=false;
 
-                $_SESSION ['name']=$validate['name'];
-                $_SESSION ['lastname']=$validate['lastname'];
-                $_SESSION ['idUser']=$validate['idUser'];
-                $_SESSION ['username']=$validate['username'];
-                $_SESSION ['rol']=$validate['rol'];
+                    $_SESSION ['name']=$validate['name'];
+                    $_SESSION ['lastname']=$validate['lastname'];
+                    $_SESSION ['idUser']=$validate['idUser'];
+                    $_SESSION ['username']=$validate['username'];
+                    $_SESSION ['rol']=$validate['rol'];
 
-                header("Location:".URL."objects/viewObjects");
-            }else{
-                $error=true;
-            }
+                    header("Location:".URL."sku/viewSku");
+                }else{
+                    $error=true;
+                }
             }else{
                 header("Location:".URL."user/index"); 
             }
