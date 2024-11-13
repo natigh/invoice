@@ -2,7 +2,7 @@
     <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Register Object</h2>
+                <h2>Register Sales Invoice</h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
                     <li class="dropdown">
@@ -23,25 +23,19 @@
                         <li>
                             <a href="#step-1">
                                 <span class="step_no">1</span>
-                                <span class="step_descr">Step 1<br /><small>Step 1 description</small></span>
+                                <span class="step_descr">Step 1<br /><small>Invoicing Data </small></span>
                             </a>
                         </li>
                         <li>
                             <a href="#step-2">
                                 <span class="step_no">2</span>
-                                <span class="step_descr">Step 2<br /><small>Step 2 description</small></span>
+                                <span class="step_descr">Step 2<br /><small>Select Sku</small></span>
                             </a>
                         </li>
                         <li>
                             <a href="#step-3">
                                 <span class="step_no">3</span>
-                                <span class="step_descr">Step 3<br /><small>Step 3 description</small></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#step-4">
-                                <span class="step_no">4</span>
-                                <span class="step_descr">Step 4<br /><small>Step 4 description</small></span>
+                                <span class="step_descr">Step 3<br /><small>Extra Information</small></span>
                             </a>
                         </li>
                     </ul>
@@ -54,26 +48,26 @@
                                 <div id="step-1">
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="">Code <span
-                                                class="required">*</span></label>
+                                                class="">*</span></label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input type="text" id="txtCode" name="txtCode" required="required"
-                                                class="form-control" placeholder="Invoice Code">
+                                            <input type="text" id="txtCode" name="txtCode" class="form-control"
+                                                placeholder="Invoice Code" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="">Date <span
-                                                class="required">*</span></label>
+                                                class="">*</span></label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input type="date" id="txtDate" required="required" class="form-control"
-                                                name="txtDate" placeholder="Date">
+                                            <input type="date" id="txtDate" class="form-control" name="txtDate"
+                                                placeholder="Date" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="">Due Date <span
-                                                class="">*</span></label>
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="">Due Date
+                                            <span class="">*</span></label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input type="date" id="txtDueDate" required="required" class="form-control"
-                                                name="txtDueDate" placeholder="Due Date">
+                                            <input type="date" id="txtDueDate" class="form-control" name="txtDueDate"
+                                                placeholder="Due Date" />
                                         </div>
                                     </div>
 
@@ -81,66 +75,171 @@
                                         <label for="" class="col-form-label col-md-3 col-sm-3 label-align">Customer
                                             Document</label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <textarea class="form-control col" id="txtCustomerDoc" rows="5" cols="50"
-                                                name="txtCustomerDoc" placeholder="Costumer Document"></textarea>
+                                            <input type="text" id="txtCustomerDoc" name="txtCustomerDoc"
+                                                class="form-control" placeholder="Customer Document" />
 
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align">Usuario</label>
                                         <div class="col-md-6 col-sm-6 ">
+                                            <input type="hidden" name="idUser" id="idUser" />
                                             <input id="txtUser" class="form-control col" type="text" name="txtUser"
-                                                placeholder="User">
+                                                placeholder="User" disabled />
                                         </div>
                                     </div>
-
                                     <div class="form-group row">
                                         <label for="" class="col-form-label col-md-3 col-sm-3 label-align">Type
                                             Customer</label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <select class="form-control" name="selTypeCustomer">
-                                                <option value="">choose option</option>
-                                                <?php foreach ($CustomerType as $cos): ?>
-                                                <option value="<?php echo $cos['idTypeCustomer']; ?>">
-                                                    <?php echo $doc['typeCustomer']; ?></option>
-                                                <?php endforeach; ?>
+                                            <select class="form-control" name="selTypeCustomer" id="selTypeCustomer">
+                                                <option value="">Choose Option...</option>
                                             </select>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="form-group row">
-                                        <label class="col-form-label col-md-3 col-sm-3 label-align">Usuario</label>
-                                        <div class="col-md-6 col-sm-6 ">
-                                            <input id="txtUser" class="form-control col" type="text" name="txtUser"
-                                            placeholder="User">
                                         </div>
                                     </div>
                                 </div>
 
                                 <div id="step-2">
-                                <div class="form-group row">
-                                        <label for=""
-                                            class="col-form-label col-md-3 col-sm-3 label-align">Remark</label>
-                                        <div class="col-md-6 col-sm-6 ">
-                                            <textarea class="form-control col" id="txtRemark" rows="5" cols="50"
-                                                name="txtRemark" placeholder="Remark"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
                                     <div class="form-group row">
-                                        <div class="col-md-9 col-sm-9 offset-md-3">
-                                            <button id="btnCancel" type="button" class="btn btn-primary"><a
-                                                    href="<?php echo URL; ?>sku/viewSku">Cancel</a></button>
-                                            <button class="btn btn-warning" type="reset">Reset</button>
-                                            <button type="submit" class="btn btn-info" name="btnSubmit">Submit</button>
+                                        <div class="col-md-3 col-sm-3">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <label for="codSku">Cod. Sku</label>
+                                                    <input type="text" class="form-control" id="codSku" name="codSku"
+                                                        placeholder="Code Sku" disabled />
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <label for="" class="">SKU</label>
+                                                    <select class="form-control" name="selSku" id="selSku">
+                                                        <option value="">Choose Option...</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <label for="">Quantity</label>
+                                                    <input type="text" class="form-control" name="txtQuantity"
+                                                        id="txtQuantity" placeholder="Quantity" />
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <label for="">Price</label>
+                                                    <input type="text" class="form-control" name="txtItemPrice"
+                                                        id="txtItemPrice" placeholder="Price" disabled />
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <button id="btnAdd" name="btnAdd"
+                                                        class="form-control btn btn-success">Add</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9 col-sm-9">
+                                            <table class="table" id="tableItems">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Cod. Sku</th>
+                                                        <th>Sku</th>
+                                                        <th>Quantity</th>
+                                                        <th>Price unit</th>
+                                                        <th>Total</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="salesDetail">
+                                                    <!--aquí se agregarán los datos por medio de jQuery-->
+                                                </tbody>
+                                            </table>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-8">
+                                                </div>
+                                                <div class="form-group col-md-1" name="subTotal">
+                                                    <label for="txtSubTotal">SubTotal</label>
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    <input type="text" class="form-control" name="txtSubTotal1"
+                                                        id="txtSubTotal1" placeholder="SubTotal" disabled />
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
-                    <!-- End SmartWizard Content -->
+
+                                <div id="step-3">
+                                    <div class="form-group row">
+                                        <div class="col-md-4 col-sm-4">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <label for=""
+                                                        class="col-form-label col-md-3 col-sm-3 label-align">Currency</label>
+                                                    <div class="col-md-6 col-sm-6">
+                                                        <select class="form-control" name="selCurrency"
+                                                            id="selCurrency">
+                                                            <option value="">Choose Option...</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <label class="col-form-label col-md-3 col-sm-3 label-align"
+                                                        for="txtSubTotal">SubTotal</label>
+                                                    <div class="col-md-6 col-sm-6">
+                                                        <input type="text" class="form-control" name="txtSubTotal2"
+                                                            id="txtSubTotal2" placeholder="SubTotal" disabled />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                </div>
+                                                <div class="form-group col-md-3" name="taxes">
+                                                    <label for="txtTaxes">TAX 19%</label>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <input type="text" class="form-control" name="txtTaxes"
+                                                        id="txtTaxes" placeholder="Tax" disabled />
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                </div>
+                                                <div class="form-group col-md-3" name="grandTotal">
+                                                    <label for="txtGrandTotal">GRAND TOTAL</label>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <input type="text" class="form-control" name="txtGrandTotal"
+                                                        id="txtGrandTotal" placeholder="Grand Total" disabled />
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <label for="txtPrice">Remark</label>
+                                                    <textarea id="txtRemark" name="txtRemark" cols="100" rows="5"
+                                                        placeholder="Remark"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-9 col-sm-9 offset-md-3">
+                                        <button id="btnCancel" type="button" class="btn btn-primary"><a
+                                                href="<?php echo URL; ?>sku/viewSku">Cancel</a></button>
+                                        <button class="btn btn-warning" type="reset">Reset</button>
+                                        <button type="submit" class="btn btn-info" name="btnSubmit">Submit</button>
+                                    </div>
+                                </div>
+                    </div>
+                    </form>
                 </div>
+                <!-- End SmartWizard Content -->
             </div>
         </div>
     </div>
-    <!-- /page content -->
+</div>
+<!-- /page content -->

@@ -48,6 +48,7 @@ class invoice extends controller{
 
                 $customerType=$this->modelI->selectTypeCustomer();
                 $currency=$this->modelC->select();
+                $sku=$this->modelS->selectSku();
                 //$code=$this->modelI->getCode();
                 //hacer el servicio para identificar si es compra o venta con su codigo
                 
@@ -58,7 +59,19 @@ class invoice extends controller{
                 require_once APP."view/_templates/footer.php";
     }
 
+    public function form() {
+        $customerType = $this->modelI->selectTypeCustomer();
+        $currency = $this->modelC->select();
+        $sku = $this->modelS->selectSku();
 
+        $response = new stdClass();
+
+        $response->customer_type = $customerType;
+        $response->currency = $currency;
+        $response->sku = $sku;
+        
+        echo json_encode($response);
+    }
 }
 
 
