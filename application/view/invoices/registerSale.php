@@ -196,50 +196,50 @@
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-12">
-                                                </div>
-                                                <div class="form-group col-md-3" name="taxes">
-                                                    <label for="txtTaxes">TAX 19%</label>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <input type="text" class="form-control" name="txtTaxes"
-                                                        id="txtTaxes" placeholder="Tax" disabled />
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-12">
-                                                </div>
-                                                <div class="form-group col-md-3" name="grandTotal">
-                                                    <label for="txtGrandTotal">GRAND TOTAL</label>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <input type="text" class="form-control" name="txtGrandTotal"
-                                                        id="txtGrandTotal" placeholder="Grand Total" disabled />
+                                                    <label class="col-form-label col-md-3 col-sm-3 label-align"
+                                                        for="txtTaxes">TAX 19%</label>
+                                                    <div class="col-md-6 col-sm-6">
+                                                        <input type="text" class="form-control" name="txtTaxes"
+                                                            id="txtTaxes" placeholder="Tax" disabled />
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-12">
-                                                    <label for="txtPrice">Remark</label>
-                                                    <textarea id="txtRemark" name="txtRemark" cols="100" rows="5"
-                                                        placeholder="Remark"></textarea>
+                                                    <label class="col-form-label col-md-3 col-sm-3 label-align"
+                                                        for="txtGrandTotal">GRAND TOTAL</label>
+                                                    <div class="col-md-6 col-sm-6">
+                                                        <input type="text" class="form-control" name="txtGrandTotal"
+                                                            id="txtGrandTotal" placeholder="Grand Total" disabled />
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-12">
+                                                        <label class="col-form-label col-md-3 col-sm-3 label-align"
+                                                            for="txtPrice">Remark</label>
+                                                        <div class="col-md-6 col-sm-6">
+                                                            <textarea id="txtRemark" name="txtRemark" cols="100" rows="5"
+                                                            placeholder="Remark"></textarea>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-9 col-sm-9 offset-md-3">
-                                        <button id="btnCancel" type="button" class="btn btn-primary"><a
-                                                href="<?php echo URL; ?>sku/viewSku">Cancel</a></button>
-                                        <button class="btn btn-warning" type="reset">Reset</button>
-                                        <button type="submit" class="btn btn-info" name="btnSubmit">Submit</button>
+                                    <div class="form-group row">
+                                        <div class="col-md-9 col-sm-9 offset-md-3">
+                                            <button id="btnCancel" type="button" class="btn btn-primary"><a
+                                                    href="<?php echo URL; ?>sku/viewSku">Cancel</a></button>
+                                            <button class="btn btn-warning" type="reset">Reset</button>
+                                            <button type="submit" class="btn btn-info" name="btnSubmit">Submit</button>
+                                        </div>
                                     </div>
                                 </div>
+                            </form>
                     </div>
-                    </form>
+                    <!-- End SmartWizard Content -->
                 </div>
-                <!-- End SmartWizard Content -->
             </div>
         </div>
     </div>
-</div>
-<!-- /page content -->
+    <!-- /page content -->

@@ -2,7 +2,7 @@ let fila = 0;
 let customer_type = [];
 let currency = [];
 let sku = [];
-let total = 0;
+let subTotal = 0;
 function dataRegister(username, idUser) {
     $.ajax({
         type: "post",
@@ -83,80 +83,130 @@ function dataRegister(username, idUser) {
                 return;
             }
 
-            total = parseFloat(price) * parseFloat(quantity);
+            let totalItem = parseFloat(price) * parseFloat(quantity);
+            subTotal = subTotal + totalItem;
             let itemSku = sku.find(element => element.idSku == idsku);
             fila ++;
             let tableBody = "";
-
-            /* const tr = document.createElement('tr');
-
-            const tdFila = document.createElement('td');
-            const tdCellTextFila = document.createTextNode(fila);
-            tdFila.appendChild(tdCellTextFila);
-            tr.appendChild(tdFila)
-
-            const tdCode = document.createElement('td');
-            const tdCellCode = document.createTextNode(code);
-            tdCode.appendChild(tdCellCode);
-            tr.appendChild(tdCode)
-
-            const tdSku = document.createElement('td');
-            const tdCellTextSku = document.createTextNode(itemSku.sku);
-            tdSku.appendChild(tdCellTextSku);
-            tr.appendChild(tdSku)
-
-            const tdQuantity = document.createElement('td');
-            const tdCellTextQuantity = document.createTextNode(quantity);
-            tdQuantity.appendChild(tdCellTextQuantity);
-            tr.appendChild(tdQuantity)
-
-            const tdPrice = document.createElement('td');
-            const tdCellTextPrice = document.createTextNode(price);
-            tdPrice.appendChild(tdCellTextPrice);
-            tr.appendChild(tdPrice)
-
-            const tdTotal = document.createElement('td');
-            const tdCellTextTotal = document.createTextNode(total);
-            tdTotal.appendChild(tdCellTextTotal);
-            tr.appendChild(tdTotal) */
 
             tableBody += "<tr>";
             tableBody += "<td>" + fila + "</td>";
             tableBody += "<td>" + code + "</td>";
             tableBody += "<td>" + itemSku.sku + "</td>";
             tableBody += "<td>" + quantity + "</td>";
-            tableBody += "<td> COP " + price + "</td>";
-            tableBody += "<td> COP " + total + "</td>";
+            let formatPrice = parseFloat(price).toLocaleString("en", {
+                style:"currency",
+                currency:"COP"
+            })
+            tableBody += "<td>" + formatPrice + "</td>";
+            let formatTotalItem = totalItem.toLocaleString("en", {
+                style:"currency",
+                currency:"COP"
+            })
+            tableBody += "<td> " + formatTotalItem + "</td>";
             tableBody += "</tr>";
-            console.log(tableBody)
             $("#salesDetail").append(tableBody);
 
-            /* $("#codSku").val("");
+            $("#codSku").val("");
             $("#selSku").val("");
             $("#txtQuantity").val("");
-            $("#txtItemPrice").val(""); */
+            $("#txtItemPrice").val("");
+            let format = subTotal.toLocaleString("en", {
+                style:"currency",
+                currency:"COP"
+            })
+
+            $("#txtSubTotal1").val(format);
+    
+            $("#txtSubTotal2").val(format);
+
+            let tax = subTotal * 0.19;
+            let formatTax = tax.toLocaleString("en", {
+                style:"currency",
+                currency:"COP"
+            })
+            $("#txtTaxes").val(formatTax);
+
+            let grandTotal = subTotal + tax;
+            let formatGrandTotal = grandTotal.toLocaleString("en", {
+                style:"currency",
+                currency:"COP"
+            })
+            $("#txtGrandTotal").val(formatGrandTotal);
 
         });
-       /*  $("#selCurrency").change(function(){
+        $("#selCurrency").change(function(){
+            const usd = 4200;
             let id = $("#selCurrency").val();
             if(id=="") return;
             
             let item = currency.find(element => element.idCurrency == id);
-            
-            if(item.currency === 'COP') return;
-                
-            let sub = $("#txtSubTotal").val();
-            console.log("sub", sub);
-            
-            let acumTot = total + parseFloat(sub);
-            console.log("acum", acumTot);
-            $("#txtSubTotal").val(acumTot);
-            let tax = $("#txtTaxes").val();
-            let grandTotal = $("#txtGrandTotal").val();
-        }) */
 
-    });  
-    
+            let subTotalString = $("#txtSubTotal2").val();
+            let subTotal = subTotalString.replace(/[^0-9.-]+/g, '');
+            
+            let taxString = $("#txtTaxes").val();
+            let tax = taxString.replace(/[^0-9.-]+/g, '');
+            
+            let grandTotalString = $("#txtGrandTotal").val();
+            let grandTotal = grandTotalString.replace(/[^0-9.-]+/g, '');
+
+            console.log({subTotal, tax, grandTotal});
+            
+            let newSubTotal = 0;
+            let newTax = 0;
+            let newGrandTotal = 0;
+
+            let newSubTotalString = '';
+            let newTaxString = '';
+            let newGrandTotalString = '';
+
+            if(item.currency === 'COP'){
+                newSubTotal = subTotal * usd;
+                newTax = tax * usd;
+                newGrandTotal = grandTotal * usd; 
+                
+                newSubTotalString = newSubTotal.toLocaleString("en", {
+                    style:"currency",
+                    currency:"COP"
+                })
+                newTaxString = newTax.toLocaleString("en", {
+                    style:"currency",
+                    currency:"COP"
+                })
+                newGrandTotalString = newGrandTotal.toLocaleString("en", {
+                    style:"currency",
+                    currency:"COP"
+                })
+
+            }else if(item.currency === 'USD'){
+                newSubTotal = subTotal / usd;
+                newTax = tax / usd;
+                newGrandTotal = grandTotal / usd; 
+
+                newSubTotalString = newSubTotal.toLocaleString("en-US", {
+                    style:"currency",
+                    currency:"USD"
+                })
+                newTaxString = newTax.toLocaleString("en-US", {
+                    style:"currency",
+                    currency:"USD"
+                })
+                newGrandTotalString = newGrandTotal.toLocaleString("en-US", {
+                    style:"currency",
+                    currency:"USD"
+                })
+            }
+
+            
+            $("#txtSubTotal2").val(newSubTotalString);
+
+            $("#txtTaxes").val(newTaxString);
+
+            $("#txtGrandTotal").val(newGrandTotalString);
+
+        });  
+    })
 }
 
 
