@@ -52,7 +52,8 @@ function SmartWizard(target, options) {
         $this.elmStepContainer.append(allDivs);
         elmActionBar.append($this.loader);
         $this.target.append($this.elmStepContainer);
-        if(!window.location.includes('objects')) {
+        console.log("LOC: ", window.location)
+        if(!window.location.pathname.includes('objects') || !window.location.pathname.includes('invoice')) {
             elmActionBar.append($this.buttons.previous)
                         .append($this.buttons.next);
         }
