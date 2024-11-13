@@ -78,6 +78,7 @@
     <script>
       //con jquery vamos a crear una constante para php validar sesiones
       $(document).ready(function(){
+        dataRegister('<?php echo $_SESSION['username']; ?>', '<?php echo $_SESSION['idUser']; ?>')
         <?php 
           if(isset($_SESSION['alert']) != false && $_SESSION['alert'] != null){
             echo $_SESSION['alert'];
