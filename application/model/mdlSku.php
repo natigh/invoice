@@ -129,5 +129,18 @@ class mdlSku{
         $lastId=$query->fetchAll(PDO::FETCH_ASSOC);
         return $lastId;
     }
+
+    public function selectSku(){
+        //crear la consulta
+        $sql="SELECT S.idSku, S.sku, S.code, P.value FROM sku as S INNER JOIN price AS P ON S.idSku = P.idSku WHERE S.active = 1";
+        // Preparar la consulta
+        $stm = $this->db->prepare($sql);
+    
+        // Ejecutar la consulta
+        $stm->execute();
+    
+        // Retornar los roles
+        return $stm->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>
