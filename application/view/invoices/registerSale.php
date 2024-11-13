@@ -133,8 +133,8 @@
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-12">
-                                                    <button id="btnAdd" name="btnAdd"
-                                                        class="form-control btn btn-success">Add</button>
+                                                    <input id="btnAdd" name="btnAdd"
+                                                        class="form-control btn btn-success" type="button" value="Add">
                                                 </div>
                                             </div>
                                         </div>
