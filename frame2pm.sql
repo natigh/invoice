@@ -162,7 +162,17 @@ INSERT INTO typecustomer (typecustomer) VALUES ('PN-Minorista'), ('PN-Mayorista'
 --
 -- --------------------------------------------------------
 --
--- Table structure for table `invoice`
+-- Table structure for table `typeinvoice`
+
+CREATE TABLE typeinvoice(
+    idTypeInvoice int AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    typeInvoice varchar(50) NOT NULL
+);
+INSERT INTO typeinvoice (typeinvoice) VALUES ('Persona natural'), ('Empresa'), ('Persona extranjera'), ('Empresa extranjera'), ('Vendedor local'), ('Vendedor Extranjero');
+
+-- --------------------------------------------------------
+--
+-- Table structure for table `iteminvoice`
 --
 CREATE TABLE invoice(
     idInvoice int AUTO_INCREMENT NOT NULL PRIMARY KEY,
