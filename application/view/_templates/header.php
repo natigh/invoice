@@ -68,8 +68,23 @@
         color: white;
     }
 
-    #tableItems{
+    #tableItems {
         min-height: 500px;
+    }
+
+    div#is-relative {
+        max-width: 420px;
+        position: relative;
+    }
+
+    #icon {
+        position: absolute;
+        display: block;
+        bottom: .5rem;
+        right: 1rem;
+
+        user-select: none;
+        cursor: pointer;
     }
     </style>
 </head>
@@ -229,7 +244,7 @@
                 </div>
             </div>
 
-            
+
 
             <!-- page content -->
             <div class="right_col" role="main">

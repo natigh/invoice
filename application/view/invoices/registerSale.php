@@ -134,7 +134,7 @@
                                             <div class="form-row">
                                                 <div class="form-group col-md-12">
                                                     <input id="btnAdd" name="btnAdd"
-                                                        class="form-control btn btn-success" type="button" value="Add">
+                                                        class="form-control btn btn-success" type="button" value="Add"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -148,6 +148,7 @@
                                                         <th>Quantity</th>
                                                         <th>Price unit</th>
                                                         <th>Total</th>
+                                                        <th>Delete</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="salesDetail">

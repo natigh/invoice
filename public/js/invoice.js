@@ -67,7 +67,9 @@ function dataRegister(username, idUser) {
             }
         })
 
-        $("#btnAdd").click(function(){
+        $("#btnAdd").click(function(e){
+            e.preventDefault();
+
             let code =  $("#codSku").val();
             let idsku = $("#selSku").val();
             let quantity = $("#txtQuantity").val();
@@ -97,6 +99,7 @@ function dataRegister(username, idUser) {
             let formatPrice = parseFloat(price).toLocaleString("en", {
                 style:"currency",
                 currency:"COP"
+                
             })
             tableBody += "<td>" + formatPrice + "</td>";
             let formatTotalItem = totalItem.toLocaleString("en", {
@@ -104,6 +107,8 @@ function dataRegister(username, idUser) {
                 currency:"COP"
             })
             tableBody += "<td> " + formatTotalItem + "</td>";
+            //tableBody += "<td><input id='btnDelete' name='btnDelete' class='btn btn-danger' type='button' value='Delete'/></td>";
+            tableBody += "<td id='btnDelete' name='btnDelete' class='btn btn-danger' onclick='remove(this)'>Eliminar</td>";
             tableBody += "</tr>";
             $("#salesDetail").append(tableBody);
 
@@ -133,8 +138,8 @@ function dataRegister(username, idUser) {
                 currency:"COP"
             })
             $("#txtGrandTotal").val(formatGrandTotal);
-
         });
+        
         $("#selCurrency").change(function(){
             const usd = 4200;
             let id = $("#selCurrency").val();
@@ -150,8 +155,6 @@ function dataRegister(username, idUser) {
             
             let grandTotalString = $("#txtGrandTotal").val();
             let grandTotal = grandTotalString.replace(/[^0-9.-]+/g, '');
-
-            console.log({subTotal, tax, grandTotal});
             
             let newSubTotal = 0;
             let newTax = 0;
@@ -205,8 +208,47 @@ function dataRegister(username, idUser) {
 
             $("#txtGrandTotal").val(newGrandTotalString);
 
-        });  
+        });
     })
+
 }
 
+function remove(e) {
+    $(e.parentNode).remove();
+    const tbody = document.getElementById('salesDetail');
+    let nt = 0
+    
+    $('#tableItems tbody tr').each(function() {
+        const tr = $(this).find("td").eq(5).html();
+        let trNum  = parseFloat(tr.replace(/[^0-9.-]+/g, ''));
+        nt += trNum;
+
+    });
+    let formatNt = nt.toLocaleString("en", {
+        style:"currency",
+        currency:"COP"
+    })
+
+    $("#txtSubTotal1").val(formatNt);
+
+    $("#txtSubTotal2").val(formatNt);
+
+    let tax = nt * 0.19;
+    let formatTax = tax.toLocaleString("en", {
+        style:"currency",
+        currency:"COP"
+    })
+    console.log("tax", tax);
+    $("#txtTaxes").val(formatTax);
+
+    let grandTotal = nt + tax;
+    let formatGrandTotal = grandTotal.toLocaleString("en", {
+        style:"currency",
+        currency:"COP"
+    })
+    $("#txtGrandTotal").val(formatGrandTotal);
+    
+    
+
+}
 
