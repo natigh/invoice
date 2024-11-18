@@ -47,23 +47,26 @@
                             <form class="form-horizontal form-label-left" method="post">
                                 <div id="step-1">
                                     <div class="form-group row">
-                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="">Code <span
-                                                class="">*</span></label>
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="txtCode">Code
+                                            <span class="">*</span></label>
                                         <div class="col-md-6 col-sm-6 ">
+                                            <input type="hidden" id="txtTypeInvoice" name="txtTypeInvoice" />
+                                            <input type="hidden" id="txtCodeh" name="txtCodeh" />
                                             <input type="text" id="txtCode" name="txtCode" class="form-control"
-                                                placeholder="Invoice Code" />
+                                                placeholder="Invoice Code" disabled />
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="">Date <span
-                                                class="">*</span></label>
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="txtDate">Date
+                                            <span class="">*</span></label>
                                         <div class="col-md-6 col-sm-6 ">
                                             <input type="date" id="txtDate" class="form-control" name="txtDate"
                                                 placeholder="Date" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="">Due Date
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="txtDueDate">Due
+                                            Date
                                             <span class="">*</span></label>
                                         <div class="col-md-6 col-sm-6 ">
                                             <input type="date" id="txtDueDate" class="form-control" name="txtDueDate"
@@ -72,12 +75,24 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <label for="" class="col-form-label col-md-3 col-sm-3 label-align">Customer
+                                        <label for="txtCustomerDoc"
+                                            class="col-form-label col-md-3 col-sm-3 label-align">Customer
                                             Document</label>
-                                        <div class="col-md-6 col-sm-6 ">
-                                            <input type="text" id="txtCustomerDoc" name="txtCustomerDoc"
-                                                class="form-control" placeholder="Customer Document" />
-
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="form-group row">
+                                                <div class="form-input form-input-inline col-md-4 col-sm-4">
+                                                    <input type="text" id="txtCustomerDoc" name="txtCustomerDoc"
+                                                        class="form-control" placeholder="Customer Document" />
+                                                </div>
+                                                <div class="form-button form-button-inline col-md-2 col-sm-2">
+                                                    <button id="btnBuscar" type="button" class="btn btn-info"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                                </div>
+                                                <div class="form-input form-input-inline col-md-6 col-sm-6">
+                                                    <input type="hidden" id="txtPersonId" name="txtPersonId" />
+                                                    <input type="text" id="txtCustomer" name="txtCustomer"
+                                                        class="form-control" placeholder="Customer Name" disabled />
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -89,7 +104,8 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="" class="col-form-label col-md-3 col-sm-3 label-align">Type
+                                        <label for="selTypeCustomer"
+                                            class="col-form-label col-md-3 col-sm-3 label-align">Type
                                             Customer</label>
                                         <div class="col-md-6 col-sm-6 ">
                                             <select class="form-control" name="selTypeCustomer" id="selTypeCustomer">
@@ -111,7 +127,7 @@
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-12">
-                                                    <label for="" class="">SKU</label>
+                                                    <label for="selSku" class="">SKU</label>
                                                     <select class="form-control" name="selSku" id="selSku">
                                                         <option value="">Choose Option...</option>
                                                     </select>
@@ -119,14 +135,14 @@
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-12">
-                                                    <label for="">Quantity</label>
+                                                    <label for="txtQuantity">Quantity</label>
                                                     <input type="text" class="form-control" name="txtQuantity"
                                                         id="txtQuantity" placeholder="Quantity" />
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-12">
-                                                    <label for="">Price</label>
+                                                    <label for="txtItemPrice">Price</label>
                                                     <input type="text" class="form-control" name="txtItemPrice"
                                                         id="txtItemPrice" placeholder="Price" disabled />
                                                 </div>
@@ -134,7 +150,8 @@
                                             <div class="form-row">
                                                 <div class="form-group col-md-12">
                                                     <input id="btnAdd" name="btnAdd"
-                                                        class="form-control btn btn-success" type="button" value="Add"/>
+                                                        class="form-control btn btn-success" type="button"
+                                                        value="Add" />
                                                 </div>
                                             </div>
                                         </div>
@@ -175,12 +192,11 @@
                                         <div class="col-md-4 col-sm-4">
                                             <div class="form-row">
                                                 <div class="form-group col-md-12">
-                                                    <label for=""
+                                                    <label for="selCurrency"
                                                         class="col-form-label col-md-3 col-sm-3 label-align">Currency</label>
                                                     <div class="col-md-6 col-sm-6">
                                                         <select class="form-control" name="selCurrency"
                                                             id="selCurrency">
-                                                            <option value="">Choose Option...</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -214,14 +230,14 @@
                                                             id="txtGrandTotal" placeholder="Grand Total" disabled />
                                                     </div>
                                                 </div>
-                                                <div class="form-row">
-                                                    <div class="form-group col-md-12">
-                                                        <label class="col-form-label col-md-3 col-sm-3 label-align"
-                                                            for="txtPrice">Remark</label>
-                                                        <div class="col-md-6 col-sm-6">
-                                                            <textarea id="txtRemark" name="txtRemark" cols="100" rows="5"
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-12">
+                                                    <label class="col-form-label col-md-3 col-sm-3 label-align"
+                                                        for="txtPrice">Remark</label>
+                                                    <div class="col-md-6 col-sm-6">
+                                                        <textarea id="txtRemark" name="txtRemark" cols="100" rows="5"
                                                             placeholder="Remark"></textarea>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

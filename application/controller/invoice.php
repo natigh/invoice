@@ -15,16 +15,28 @@ class invoice extends controller{
     }
 
     public function registerSale(){
-        //validamos si existen los atributos del modelo y los name del formulario
         if(isset($_POST['btnSubmit'])){
-            /*$this->modelI->__SET('code', $_POST['txtCode']);
+            //die(print_r($_POST));
+
+            $this->modelI->__SET('code', $_POST['txtCodeh']);
             $this->modelI->__SET('date', $_POST['txtDate']);
-            $this->modelI->__SET('idPerson', $_POST['txtCustomerDoc']);
-            $this->modelI->__SET('idUser', $_POST['txtUser']);
+            $this->modelI->__SET('dueDate', $_POST['txtDueDate']);
+            $this->modelI->__SET('idPerson', $_POST['txtPersonId']);
+            $this->modelI->__SET('idUser', $_POST['idUser']);
             $this->modelI->__SET('typeCustomer', $_POST['selTypeCustomer']);
-            $this->modelI->__SET('remark', $_POST['txtPhone']);
+            $this->modelI->__SET('remark', $_POST['txtRemark']);
+
+            $this->modelI->__SET('typeInvoice', $_POST['txtTypeInvoice']);
+
+
+            //die(print_r($this->modelI));
+
+            $invoice=$this->modelI->registerInvoice();
            
-            $people=$this->modelU->registerPeople();
+            
+            
+           
+            /* 
             //mandar registro
             if($people){
                 $lastId=$this->modelU->viewLastId();
@@ -43,34 +55,43 @@ class invoice extends controller{
 
                 $user =$this->modelU->registerUser();
                 //$clean=$this->modelU->clean();
-                header("Location: ". URL . "user/viewUsers");*/
+                 */
+                header("Location: ". URL . "invoices/viewHistorySales");
         }
-
-                $customerType=$this->modelI->selectTypeCustomer();
-                $currency=$this->modelC->select();
-                $sku=$this->modelS->selectSku();
-                //$code=$this->modelI->getCode();
-                //hacer el servicio para identificar si es compra o venta con su codigo
-                
-                //$buyer=$this->modelPe->select($document);
-                
                 require_once APP."view/_templates/header.php";
                 require_once APP."view/invoices/registerSale.php";
                 require_once APP."view/_templates/footer.php";
     }
 
-    public function form() {
+    public function sales() {
         $customerType = $this->modelI->selectTypeCustomer();
         $currency = $this->modelC->select();
         $sku = $this->modelS->selectSku();
+        $nextCodeType = explode('/', $_GET['url'])[1]; 
+        $typeInvoice = $this->modelI->getTypeInvoice($nextCodeType); 
+        $code = $this->modelI->getNextCode($nextCodeType);
+        $people = $this->modelPe->selectOnlyPeople();
+        
+        $nextCode=0;
+
+        foreach($code as $c){
+            $nextCode=$c['code'];
+        }
 
         $response = new stdClass();
 
         $response->customer_type = $customerType;
         $response->currency = $currency;
         $response->sku = $sku;
-        
+        $response->code = $nextCode + 1;
+        $response->typeInvoice = $typeInvoice;
+        $response->people = $people;
+
         echo json_encode($response);
+    }
+
+    public function purchase() {
+
     }
 }
 

@@ -132,5 +132,15 @@ class mdlPeople{
 
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function selectOnlyPeople() {
+        $sql = "SELECT P.* FROM person AS P LEFT JOIN users AS U ON P.idPerson = U.idPerson WHERE U.idPerson IS NULL";
+    
+        $query = $this->db->prepare($sql);
+    
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>

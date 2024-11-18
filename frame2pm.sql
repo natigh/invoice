@@ -168,7 +168,7 @@ CREATE TABLE typeinvoice(
     idTypeInvoice int AUTO_INCREMENT NOT NULL PRIMARY KEY,
     typeInvoice varchar(50) NOT NULL
 );
-INSERT INTO typeinvoice (typeinvoice) VALUES ('Persona natural'), ('Empresa'), ('Persona extranjera'), ('Empresa extranjera'), ('Vendedor local'), ('Vendedor Extranjero');
+INSERT INTO typeinvoice (typeinvoice) VALUES ('sales'), ('purchase');
 
 -- --------------------------------------------------------
 --
@@ -178,6 +178,7 @@ CREATE TABLE invoice(
     idInvoice int AUTO_INCREMENT NOT NULL PRIMARY KEY,
     code int NOT NULL,
     date DATE NOT NULL,
+    dueDate DATE NOT NULL,
     idPerson int NOT NULL,
     FOREIGN KEY (idPerson) REFERENCES person(idPerson)
         ON DELETE restrict ON UPDATE cascade,
@@ -186,6 +187,9 @@ CREATE TABLE invoice(
         ON DELETE restrict ON UPDATE cascade,
     typeCustomer int NOT NULL,
     FOREIGN KEY (typeCustomer) REFERENCES typecustomer(idTypeCustomer)
+        ON DELETE restrict ON UPDATE cascade,
+    typeInvoice int NOT NULL,
+    FOREIGN KEY (typeInvoice) REFERENCES typeinvoice(idTypeInvoice)
         ON DELETE restrict ON UPDATE cascade,
     remark varchar(200)
 );

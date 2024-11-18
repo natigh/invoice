@@ -1,12 +1,17 @@
-let fila = 0;
-let customer_type = [];
-let currency = [];
-let sku = [];
-let subTotal = 0;
+let fila = 0,
+    subTotal = 0;
+
+let customer_type = [],
+    currency = [],
+    sku = [],
+    people = [];
+
+let code, typeInvoice;
+
 function dataRegister(username, idUser) {
     $.ajax({
         type: "post",
-        url: url + "invoice/form",
+        url: url + "invoice/sales",
         data: {}
     }).done(function(result) {
         const data = JSON.parse(result);
@@ -15,10 +20,16 @@ function dataRegister(username, idUser) {
         customer_type = data.customer_type;
         currency = data.currency;
         sku = data.sku;
+        code = data.code;
+        typeInvoice = data.typeInvoice;
+        people = data.people;
 
         const selectTypeCustomer = document.getElementsByName("selTypeCustomer")[0];
         document.getElementById("idUser").value = idUser;
         document.getElementById("txtUser").value = username;
+        document.getElementById("txtCode").value = code;
+        document.getElementById("txtCodeh").value = code;
+        document.getElementById("txtTypeInvoice").value = typeInvoice.idTypeInvoice;
 
         for (let index = 0; index < customer_type.length; index++) {
             const ct = customer_type[index];
@@ -200,7 +211,6 @@ function dataRegister(username, idUser) {
                     currency:"USD"
                 })
             }
-
             
             $("#txtSubTotal2").val(newSubTotalString);
 
@@ -211,11 +221,27 @@ function dataRegister(username, idUser) {
         });
     })
 
+    $("#btnBuscar").click(function(event) {
+            event.preventDefault();
+        
+            const document = $("#txtCustomerDoc").val();
+
+            $("#txtCustomer").val(null);
+            $("#txtPersonId").val(null);
+
+            const person = people.find(p => p.document === parseInt(document));
+
+            if(!person) return;
+
+            $("#txtCustomer").val(person.name + ' ' + person.lastname)
+            $("#txtPersonId").val(person.idPerson)
+        
+    })
 }
 
 function remove(e) {
     $(e.parentNode).remove();
-    const tbody = document.getElementById('salesDetail');
+
     let nt = 0
     
     $('#tableItems tbody tr').each(function() {
@@ -247,8 +273,4 @@ function remove(e) {
         currency:"COP"
     })
     $("#txtGrandTotal").val(formatGrandTotal);
-    
-    
-
 }
-

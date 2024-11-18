@@ -86,6 +86,9 @@
         user-select: none;
         cursor: pointer;
     }
+    #txtRemark {
+        resize: none;
+    }
     </style>
 </head>
 
