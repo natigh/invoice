@@ -12,7 +12,6 @@ class sku extends controller{
     
     public function viewSku(){
         if(isset($_POST['btnSubmit'])){
-            //die (print_r($_POST));
             $this->modelS->__SET('idSku', $_POST['idSku']);
             $this->modelS->__SET('code', $_POST['txtCode']);
             $this->modelS->__SET('sku', $_POST['txtSku']);
@@ -20,7 +19,6 @@ class sku extends controller{
             $this->modelS->__SET('stock', $_POST['txtStock']);
 
             $editSku=$this->modelS->updateSku();
-            //die (print_r($_POST));
             if(isset($_POST['txtPrice'])){
                 $this->modelP->__SET('value', $_POST['txtPrice']);
                 $this->modelP->__SET('idPrice', $_POST['idPrice']);

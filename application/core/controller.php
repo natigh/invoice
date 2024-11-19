@@ -49,4 +49,11 @@ class Controller
         // create new "model" (and pass the database connection)
         return new $model($this->db);
     }
+
+    public function debugVariable($something) {
+        echo "<pre>";
+        print_r($something);
+        echo "</pre>";
+        return;
+    }
 }
