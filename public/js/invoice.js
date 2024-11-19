@@ -25,6 +25,8 @@ function dataRegister(username, idUser) {
         people = data.people;
 
         const selectTypeCustomer = document.getElementsByName("selTypeCustomer")[0];
+
+        console.log("USERNAME: ", username, "ID USER: ", idUser);
         document.getElementById("idUser").value = idUser;
         document.getElementById("txtUser").value = username;
         document.getElementById("txtCode").value = code;
@@ -104,15 +106,15 @@ function dataRegister(username, idUser) {
 
             tableBody += "<tr>";
             tableBody += "<td>" + fila + "</td>";
-            tableBody += "<td>" + code + "</td>";
-            tableBody += "<td>" + itemSku.sku + "</td>";
-            tableBody += "<td>" + quantity + "</td>";
+            tableBody += "<td><input type='text' name='products[code][]' value='" + code + "'/></td>";
+            tableBody += "<td><input type='text' name='products[sku][]' value='" + itemSku.sku + "'/></td>";
+            tableBody += "<td><input type='text' name='products[quantity][]' value='" + quantity + "'/></td>";
             let formatPrice = parseFloat(price).toLocaleString("en", {
                 style:"currency",
                 currency:"COP"
                 
             })
-            tableBody += "<td>" + formatPrice + "</td>";
+            tableBody += "<td><input type='text' name='products[price][]' value='"+ formatPrice + "'/></td>";
             let formatTotalItem = totalItem.toLocaleString("en", {
                 style:"currency",
                 currency:"COP"
@@ -248,8 +250,8 @@ function remove(e) {
         const tr = $(this).find("td").eq(5).html();
         let trNum  = parseFloat(tr.replace(/[^0-9.-]+/g, ''));
         nt += trNum;
-
     });
+
     let formatNt = nt.toLocaleString("en", {
         style:"currency",
         currency:"COP"
@@ -274,3 +276,26 @@ function remove(e) {
     })
     $("#txtGrandTotal").val(formatGrandTotal);
 }
+
+function editRemark(idInvoice) {
+    $.ajax({
+        type: "post",
+        //llamar la constante creada en header con el enrutamiento
+        //url: "nombre_del_controller/metodo"
+        url: url + "invoice/viewHistorySalesById",
+        data: { idInvoice }
+    }).done(function(result){
+        console.log("DONE? : ", result);
+        const remark=JSON.parse(result);
+        console.log(remark);
+        document.getElementById("txtRemarkH").value=remark.remarkH;
+        document.getElementById("idInvoice").value=remark.idInvoice;
+        
+    }).fail(function(error){
+        console.log("ERROR? : ", error);
+        Swal.fire("Wrong to change Status", " ", "Error")
+    })
+}
+
+
+

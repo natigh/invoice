@@ -14,10 +14,36 @@ class invoice extends controller{
         $this->modelU = $this->loadModel("mdlUsers");
     }
 
+    public function viewHistorySales(){
+        if(isset($_POST['btnSubmit'])){
+            //die(print_r($_POST));
+            $this->modelI->__SET('remarkH', $_POST['txtRemarkH']);
+            $this->modelI->__SET('idInvoice', $_POST['idInvoice']);
+
+            $editRemarkH=$this->modelI->updateRemarkH();
+        }
+
+        $sales=$this->modelI->viewHistorySales();
+
+        require_once APP."view/_templates/header.php";
+        require_once APP."view/invoices/viewHistorySales.php";
+        require_once APP."view/_templates/footer.php";
+        
+    }
+
     public function registerSale(){
         if(isset($_POST['btnSubmit'])){
             //die(print_r($_POST));
-
+            echo '<pre>';
+            print("--------------------------------"."\n");
+            echo '</pre>';
+            /*echo '<pre>';
+            print_r($_POST);
+            echo '</pre>';*/
+            $this->debugVariable($_POST);
+            echo '<pre>';
+            print_r("--------------------------------"."\n");
+            echo '</pre>';
             $this->modelI->__SET('code', $_POST['txtCodeh']);
             $this->modelI->__SET('date', $_POST['txtDate']);
             $this->modelI->__SET('dueDate', $_POST['txtDueDate']);
@@ -28,10 +54,24 @@ class invoice extends controller{
 
             $this->modelI->__SET('typeInvoice', $_POST['txtTypeInvoice']);
 
-
             //die(print_r($this->modelI));
 
-            $invoice=$this->modelI->registerInvoice();
+            $productsCode = $_POST['products']['code'];
+            $productsSku = $_POST['products']['sku'];
+            $productsQuantity = $_POST['products']['quantity'];
+            $productsPrice = $_POST['products']['price'];
+
+            foreach ($productsSku as $index => $sku) {
+                /*echo '<pre>';
+                print_r("CODE: ".$productsCode[$index]." SKU: ".$sku." QUANTITY: ".$productsQuantity[$index]. " PRICE: ". $productsPrice[$index]);
+                echo '</pre>';*/
+                $this->debugVariable("CODE: ".$productsCode[$index]." SKU: ".$sku." QUANTITY: ".$productsQuantity[$index]. " PRICE: ". $productsPrice[$index]);
+            }
+
+            die("ME MORI -> ADIOS");
+            //die(print_r($this->modelI));
+
+            //$invoice=$this->modelI->registerInvoice();
            
             
             
@@ -91,7 +131,12 @@ class invoice extends controller{
     }
 
     public function purchase() {
+        
+    }
 
+    public function viewHistorySalesById(){
+        $invoice=$this->modelI->invoiceId($_POST['idInvoice']);
+        echo json_encode($invoice);
     }
 }
 

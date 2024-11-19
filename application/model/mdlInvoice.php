@@ -12,6 +12,7 @@ class mdlInvoice {
     private $typeCustomer;
     private $typeInvoice;
     private $remark;
+    private $remarkH;
 
     public $db;
 
@@ -88,6 +89,38 @@ class mdlInvoice {
         $stm->execute();
 
         return $stm -> fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function viewHistorySales(){
+        $sql = "SELECT I.*, CONCAT(P.name, ' ', P.lastname) AS 'Customer Name',  P.document AS 'Customer Document', U.username AS 'user', I.remarkH AS 'remark' FROM invoice AS I INNER JOIN person AS P ON P.idPerson = I.idPerson INNER JOIN users AS U ON U.idUser = I.idUser";
+
+        $stm= $this->db->prepare($sql);
+        $stm->execute();
+        $sales=$stm->fetchAll(PDO::FETCH_ASSOC);
+        return $sales;
+    }
+
+    public function updateRemarkH(){
+        $sql= $this->db->prepare("UPDATE invoice SET remarkH = ? WHERE idInvoice = ?");
+
+        $sql->bindParam(1, $this->remarkH);
+        $sql->bindParam(2, $this->idInvoice);
+        $result = $sql->execute();
+        return $result;
+    }
+
+    public function invoiceId($idInvoice){
+        //crear consulta
+        $sql = "SELECT I.idInvoice, I.remarkH FROM invoice AS I WHERE I.idInvoice = ?;";
+
+        //preparar la consulta y ejecutarla
+        $query = $this -> db -> prepare($sql);
+        $query -> bindParam(1, $idInvoice);
+        $query -> execute();
+        $invoice = $query -> fetch(PDO::FETCH_ASSOC); 
+
+        if($invoice) $invoice['idInvoice'] = $idInvoice;
+        return $invoice;
     }
 
 }

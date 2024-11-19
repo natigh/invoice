@@ -77,7 +77,7 @@
                                     <div class="form-group row">
                                         <label for="txtCustomerDoc"
                                             class="col-form-label col-md-3 col-sm-3 label-align">Customer
-                                            Document</label>
+                                            Document <span class="">*</span></label>
                                         <div class="col-md-6 col-sm-6">
                                             <div class="form-group row">
                                                 <div class="form-input form-input-inline col-md-4 col-sm-4">
@@ -106,7 +106,7 @@
                                     <div class="form-group row">
                                         <label for="selTypeCustomer"
                                             class="col-form-label col-md-3 col-sm-3 label-align">Type
-                                            Customer</label>
+                                            Customer <span class="">*</span></label>
                                         <div class="col-md-6 col-sm-6 ">
                                             <select class="form-control" name="selTypeCustomer" id="selTypeCustomer">
                                                 <option value="">Choose Option...</option>
@@ -246,7 +246,7 @@
                                     <div class="form-group row">
                                         <div class="col-md-9 col-sm-9 offset-md-3">
                                             <button id="btnCancel" type="button" class="btn btn-primary"><a
-                                                    href="<?php echo URL; ?>sku/viewSku">Cancel</a></button>
+                                                    href="<?php echo URL; ?>invoice/viewHistorySales">Cancel</a></button>
                                             <button class="btn btn-warning" type="reset">Reset</button>
                                             <button type="submit" class="btn btn-info" name="btnSubmit">Submit</button>
                                         </div>
