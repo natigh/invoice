@@ -25,8 +25,6 @@ function dataRegister(username, idUser) {
         people = data.people;
 
         const selectTypeCustomer = document.getElementsByName("selTypeCustomer")[0];
-
-        console.log("USERNAME: ", username, "ID USER: ", idUser);
         document.getElementById("idUser").value = idUser;
         document.getElementById("txtUser").value = username;
         document.getElementById("txtCode").value = code;
