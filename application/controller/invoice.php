@@ -33,17 +33,6 @@ class invoice extends controller{
 
     public function registerSale(){
         if(isset($_POST['btnSubmit'])){
-            //die(print_r($_POST));
-            echo '<pre>';
-            print("--------------------------------"."\n");
-            echo '</pre>';
-            /*echo '<pre>';
-            print_r($_POST);
-            echo '</pre>';*/
-            $this->debugVariable($_POST);
-            echo '<pre>';
-            print_r("--------------------------------"."\n");
-            echo '</pre>';
             $this->modelI->__SET('code', $_POST['txtCodeh']);
             $this->modelI->__SET('date', $_POST['txtDate']);
             $this->modelI->__SET('dueDate', $_POST['txtDueDate']);
@@ -54,7 +43,7 @@ class invoice extends controller{
 
             $this->modelI->__SET('typeInvoice', $_POST['txtTypeInvoice']);
 
-            //die(print_r($this->modelI));
+            //$invoice=$this->modelI->registerInvoice();
 
             $productsCode = $_POST['products']['code'];
             $productsSku = $_POST['products']['sku'];
@@ -66,36 +55,13 @@ class invoice extends controller{
                 print_r("CODE: ".$productsCode[$index]." SKU: ".$sku." QUANTITY: ".$productsQuantity[$index]. " PRICE: ". $productsPrice[$index]);
                 echo '</pre>';*/
                 $this->debugVariable("CODE: ".$productsCode[$index]." SKU: ".$sku." QUANTITY: ".$productsQuantity[$index]. " PRICE: ". $productsPrice[$index]);
+                // Creación del modelo de item invoice para guardar los items de la factura.
+                // hacer el SET de los datos en los atributos de la clase de item invoice (no olvidarse el id de invoice del registro previo)
+                // una vez que tenemos todos los datos de un item, crear el método en el modelo para registrarlos
             }
 
             die("ME MORI -> ADIOS");
-            //die(print_r($this->modelI));
-
-            //$invoice=$this->modelI->registerInvoice();
-           
             
-            
-           
-            /* 
-            //mandar registro
-            if($people){
-                $lastId=$this->modelU->viewLastId();
-                $lastIdValue=null;
-
-                foreach($lastId as $value){
-                    $lastIdValue=$value['lastId'];
-                }
-
-            }
-                $this->modelU->__SET('idPerson', $lastIdValue);
-                $this->modelU->__SET('username', $_POST['txtUsername']);
-                $this->modelU->__SET('password', $_POST['txtPassword']);
-                $this->modelU->__SET('idRol', $_POST['selRol']);
-                $this->modelU->__SET('activeU', 1);
-
-                $user =$this->modelU->registerUser();
-                //$clean=$this->modelU->clean();
-                 */
                 header("Location: ". URL . "invoices/viewHistorySales");
         }
                 require_once APP."view/_templates/header.php";
