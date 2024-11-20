@@ -14,6 +14,7 @@ function dataRegister(username, idUser) {
         url: url + "invoice/sales",
         data: {}
     }).done(function(result) {
+        console.log(result);
         const data = JSON.parse(result);
         console.log(data);
 

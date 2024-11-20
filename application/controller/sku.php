@@ -39,7 +39,6 @@ class sku extends controller{
     }
 
     public function registerSku(){
-        //validamos si existen los atributos del modelo y los name del formulario
         if(isset($_POST['btnSubmit'])){
             $currency=$this->modelC->currency('COP');
             
@@ -47,7 +46,7 @@ class sku extends controller{
             $this->modelP->__SET('idCurrency', $currency['idCurrency']);
             
             $price=$this->modelP->registerPrice();
-            
+
             if($price){
                 $lastIdPrice=$this->modelP->viewLastIdPrice();
                 $lastIdValue=null;
@@ -63,11 +62,6 @@ class sku extends controller{
             $this->modelS->__SET('stock', $_POST['txtStock']);
             $this->modelS->__SET('idPrice', $lastIdValue);
             $this->modelS->__SET('activeO', 1);
-
-            // 1. Primero registramos el precio
-            // 2. Extraemos el id de precio en una variable
-            // 3. Seteamos el id de precio en el modelo de sku
-            // 4. Registramos el sku
 
             $this->modelS->registerSku();
 

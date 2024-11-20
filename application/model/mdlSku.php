@@ -7,6 +7,7 @@ class mdlSku{
     private $sku;
     private $description;
     private $stock;
+    private $idPrice;
     private $activeO;
     public $db;
 
@@ -31,23 +32,19 @@ class mdlSku{
 
     public function registerSku(){
         //crear la consulta
-        $sql="INSERT INTO sku (code, sku, description, stock, active)
-         VALUES(?,?,?,?,?)";
-
-        //estado del usuario siempre queda activo no hace falta mandarlo desde  el formulario
+        $sql="INSERT INTO sku (code, sku, description, stock, idPrice, active)
+         VALUES(?,?,?,?,?,?)";
 
         // preparar la consulta
         $stm=$this->db->prepare($sql);
 
-        // ejecutar la consulta
-        // bindParam se utiliza para preparar y asociar valores a los parámetros de una consulta SQL, lo que ayuda a prevenir ataques de inyección SQL y permite una ejecución más eficiente de las consultas.
         $stm->bindParam(1, $this->code);
         $stm->bindParam(2, $this->sku);
         $stm->bindParam(3, $this->description);
         $stm->bindParam(4, $this->stock);
-        $stm->bindParam(5, $this->activeO);
-        // enlazar parámetros a una consulta SQL preparada. el número 1 indica el primer parámetro en la consulta SQL que se está preparando, $this->document es el valor que se va a enlazar a ese parámetro.
-        // ejecutar la consulta
+        $stm->bindParam(5, $this->idPrice);
+        $stm->bindParam(6, $this->activeO);
+        
         $result=$stm->execute();
         return $result;
     }

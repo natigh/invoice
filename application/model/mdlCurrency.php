@@ -37,7 +37,7 @@ class mdlCurrency{
     }
 
     public function select() {
-        $sql = "SELECT idCurrency, currency FROM currency WHERE active = 1";
+        $sql = "SELECT idCurrency, currency FROM currency";
 
         $query = $this->db->prepare($sql);
         $query->execute();
