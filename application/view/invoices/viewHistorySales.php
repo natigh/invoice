@@ -32,7 +32,6 @@
                                         <th>Customer Document</th>
                                         <th>Grand Total</th>
                                         <th>User</th>
-                                        <th>Remark</th>
                                         <th>Edit</th>
                                     </tr>
                                 </thead>
@@ -47,7 +46,6 @@
                                         <td><?php echo $value['Customer Document']; ?></td>
                                         <td><?php echo $value['Grand Total']; ?></td>
                                         <td><?php echo $value['user']; ?></td>
-                                        <td><?php echo $value['remarkH']; ?></td>
                                         <td>
                                             <button type="button" id="btnRemark" name="btnRemark" class="btn btn-primary btn-xs" data-toggle="modal"
                                             data-target="#modal-edit" onclick="editRemark('<?php echo $value['idInvoice']; ?>')" ><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></button>

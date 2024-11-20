@@ -40,10 +40,10 @@ class invoice extends controller{
             $this->modelI->__SET('idUser', $_POST['idUser']);
             $this->modelI->__SET('typeCustomer', $_POST['selTypeCustomer']);
             $this->modelI->__SET('remark', $_POST['txtRemark']);
-
             $this->modelI->__SET('typeInvoice', $_POST['txtTypeInvoice']);
 
-            //$invoice=$this->modelI->registerInvoice();
+            //descomentar para probar
+            $invoice=$this->modelI->registerInvoice();
 
             $productsCode = $_POST['products']['code'];
             $productsSku = $_POST['products']['sku'];

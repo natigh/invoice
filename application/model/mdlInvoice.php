@@ -92,7 +92,7 @@ class mdlInvoice {
     }
 
     public function viewHistorySales(){
-        $sql = "SELECT I.*, CONCAT(P.name, ' ', P.lastname) AS 'Customer Name',  P.document AS 'Customer Document', U.username AS 'user', I.remarkH AS 'remark' FROM invoice AS I INNER JOIN person AS P ON P.idPerson = I.idPerson INNER JOIN users AS U ON U.idUser = I.idUser";
+        $sql = "SELECT I.*, CONCAT(P.name, ' ', P.lastname) AS 'Customer Name',  P.document AS 'Customer Document', U.username AS 'user' FROM invoice AS I INNER JOIN person AS P ON P.idPerson = I.idPerson INNER JOIN users AS U ON U.idUser = I.idUser";
 
         $stm= $this->db->prepare($sql);
         $stm->execute();
