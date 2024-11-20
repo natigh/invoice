@@ -54,7 +54,7 @@ class mdlSku{
 
     public function viewSku(){
         //crear la consulta
-        $sql = "SELECT S.*, CONCAT('$ ', P.value,' ',C.currency) AS value, P.idPrice FROM sku AS S INNER JOIN price AS P ON S.idSku = P.idSku INNER JOIN currency AS C ON P.idCurrency = C.idCurrency";
+        $sql = "SELECT S.*, CONCAT('$ ', P.value,' ',C.currency) AS value, P.idPrice FROM sku AS S INNER JOIN price AS P ON P.idPrice = S.idPrice INNER JOIN currency AS C ON P.idCurrency = C.idCurrency";
         //die($sql);
         //preparar la consulta
         $stm= $this->db->prepare($sql);
@@ -80,7 +80,7 @@ class mdlSku{
 
     public function skuId($idSku, $idPrice){
         //crear consulta
-        $sql = "SELECT S.*, P.* FROM sku AS S INNER JOIN price AS P ON S.idSku = P.IdSku WHERE S.idSku = ? AND P.idPrice = ?;";
+        $sql = "SELECT S.*, P.* FROM sku AS S INNER JOIN price AS P ON S.idPrice = P.idPrice WHERE S.idSku = ? AND P.idPrice = ?;";
 
         //preparar la consulta y ejecutarla
         $query = $this -> db -> prepare($sql);
@@ -132,7 +132,7 @@ class mdlSku{
 
     public function selectSku(){
         //crear la consulta
-        $sql="SELECT S.idSku, S.sku, S.code, P.value FROM sku as S INNER JOIN price AS P ON S.idSku = P.idSku WHERE S.active = 1";
+        $sql="SELECT S.idSku, S.sku, S.code, P.value FROM sku as S INNER JOIN price AS P ON S.idPrice = P.idPrice WHERE S.active = 1";
         // Preparar la consulta
         $stm = $this->db->prepare($sql);
     

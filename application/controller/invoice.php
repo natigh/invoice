@@ -60,7 +60,7 @@ class invoice extends controller{
                 // una vez que tenemos todos los datos de un item, crear el método en el modelo para registrarlos
             }
 
-            die("ME MORI -> ADIOS");
+            //die("ME MORI -> ADIOS");
             
                 header("Location: ". URL . "invoices/viewHistorySales");
         }

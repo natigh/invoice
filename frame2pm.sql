@@ -19,7 +19,9 @@ SET time_zone = "+00:00";
 
 --
 -- Database: `frame2pm`
---
+CREATE DATABASE IF NOT EXISTS invoice;
+
+USE invoice;
 
 -- --------------------------------------------------------
 
@@ -66,8 +68,7 @@ CREATE TABLE person(
     name varchar (50) NOT NULL,
     lastname varchar (50) NOT NULL,
     typedocument int NOT NULL,
-    FOREIGN KEY (typedocument) REFERENCES typedocument(idTypeDocument)
-        ON DELETE restrict ON UPDATE cascade,
+    FOREIGN KEY (typedocument) REFERENCES typedocument(idTypeDocument),
     document int NOT NULL,
     phone varchar(20),
     Address varchar(100),
@@ -75,6 +76,8 @@ CREATE TABLE person(
     birthdate date,
     active tinyint NOT NULL
 );
+
+INSERT INTO person (name, lastname, typedocument, document, phone, Address, email, birthdate, active) VALUES ('Natalia', 'Garcia', 1, 123654, 9547845123, 'calle 1 # 2- 3', 'natag@yahoo.com', '1994-11-13', 1);
 
 
 --
@@ -90,13 +93,13 @@ CREATE TABLE users(
     username varchar (30) NOT NULL,
     PASSWORD varchar (30) NOT NULL,
     idRol int NOT NULL,
-     FOREIGN KEY (idRol) REFERENCES rol(idRol)
-        ON DELETE restrict ON UPDATE cascade,
+     FOREIGN KEY (idRol) REFERENCES rol(idRol),
     idPerson int NOT NULL,
-     FOREIGN KEY (idPerson) REFERENCES person(idPerson)
-        ON DELETE restrict ON UPDATE cascade,
+     FOREIGN KEY (idPerson) REFERENCES person(idPerson),
     active tinyint NOT NULL
 );
+
+INSERT INTO users (username, PASSWORD, idRol, idPerson, active) VALUES('natag', 'asdfg', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -105,14 +108,25 @@ CREATE TABLE users(
 --
 CREATE TABLE currency(
     idCurrency int AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    currency varchar(50) NOT NULL,
-    active tinyint NOT NULL
+    currency varchar(50) NOT NULL
 );
 
 --
 -- Dumping data for table `currency`
 --
 INSERT INTO currency (currency) VALUES ('COP'), ('USD'), ('EUR'), ('GBP'), ('CAD'), ('AUD');
+
+-- --------------------------------------------------------
+--
+--
+-- Table structure for table `price`
+--
+CREATE TABLE price(
+    idPrice int AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    idCurrency int NOT NULL,
+    FOREIGN KEY (idCurrency) REFERENCES currency(idCurrency),
+    value int NOT NULL
+);
 
 -- --------------------------------------------------------
 --
@@ -124,26 +138,9 @@ CREATE TABLE sku(
     sku varchar(100) NOT NULL,
     description varchar(500),
     stock int NOT NULL,
+    idPrice int NOT NULL,
+    FOREIGN KEY (idPrice) REFERENCES price(idPrice),
     active tinyint NOT NULL
-);
-
---
-
--- --------------------------------------------------------
---
---
--- Table structure for table `price`
---
-CREATE TABLE price(
-    idPrice int AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    idCurrency int NOT NULL,
-    FOREIGN KEY (idCurrency) REFERENCES currency(idCurrency)
-        ON DELETE restrict ON UPDATE cascade,
-    value int NOT NULL,
-    idSku int NOT NULL,
-    FOREIGN KEY(idSku) REFERENCES sku(idSku)
-	ON DELETE restrict ON UPDATE cascade
-
 );
 
 --
@@ -180,18 +177,14 @@ CREATE TABLE invoice(
     date DATE NOT NULL,
     dueDate DATE NOT NULL,
     idPerson int NOT NULL,
-    FOREIGN KEY (idPerson) REFERENCES person(idPerson)
-        ON DELETE restrict ON UPDATE cascade,
+    FOREIGN KEY (idPerson) REFERENCES person(idPerson),
     idUser int NOT NULL,
-    FOREIGN KEY (idUser) REFERENCES users(idUser)
-        ON DELETE restrict ON UPDATE cascade,
+    FOREIGN KEY (idUser) REFERENCES users(idUser),
     typeCustomer int NOT NULL,
-    FOREIGN KEY (typeCustomer) REFERENCES typecustomer(idTypeCustomer)
-        ON DELETE restrict ON UPDATE cascade,
+    FOREIGN KEY (typeCustomer) REFERENCES typecustomer(idTypeCustomer),
     typeInvoice int NOT NULL,
-    FOREIGN KEY (typeInvoice) REFERENCES typeinvoice(idTypeInvoice)
-        ON DELETE restrict ON UPDATE cascade,
-    remark varchar(200)
+    FOREIGN KEY (typeInvoice) REFERENCES typeinvoice(idTypeInvoice),
+    remark varchar(80)
 );
 --
 -- --------------------------------------------------------
@@ -202,15 +195,12 @@ CREATE TABLE iteminvoice(
     idItemInvoice int AUTO_INCREMENT NOT NULL PRIMARY KEY,
     code int NOT NULL,
     idSku int NOT NULL,
-    FOREIGN KEY (idSku) REFERENCES sku(idSku)
-        ON DELETE restrict ON UPDATE cascade,
+    FOREIGN KEY (idSku) REFERENCES sku(idSku),
     idPrice int NOT NULL,
-    FOREIGN KEY (idPrice) REFERENCES price(idPrice)
-        ON DELETE restrict ON UPDATE cascade,
+    FOREIGN KEY (idPrice) REFERENCES price(idPrice),
     quantity int NOT NULL,
     idInvoice int NOT NULL,
     FOREIGN KEY (idInvoice) REFERENCES invoice(idInvoice)
-        ON DELETE restrict ON UPDATE cascade
 );
 --
 

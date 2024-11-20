@@ -5,7 +5,7 @@ class mdlPrice{
     private $idPrice;
     private $idCurrency;
     private $value;
-    private $idSku;
+    private $price;
 
     public $db;
 
@@ -28,32 +28,35 @@ class mdlPrice{
         }
     }
 
-    public function registerPrice($idSku, $idCurrency) {
-        $this->__SET('idSku', $idSku);
-        $this->__SET('value', $_POST['txtPrice']);
-        $this->__SET('idCurrency', $idCurrency);
-
-        $sql="INSERT INTO price (idCurrency, value, idSku) VALUES(?,?,?)";
+    public function registerPrice() {
+        // Revisar esta query
+        $sql="INSERT INTO price (idCurrency, value) VALUES(?,?)";
 
         $stm=$this->db->prepare($sql);
 
         $stm->bindParam(1, $this->idCurrency);
         $stm->bindParam(2, $this->value);
-        $stm->bindParam(3, $this->idSku);
 
         $result = $stm->execute();
         return $result;
     }
 
     public function updatePrice(){
-        $sql= $this->db->prepare("UPDATE price SET value = ? WHERE idPrice = ? AND idSku = ?");
+        $sql= $this->db->prepare("UPDATE price SET value = ? WHERE idPrice = ?");
 
         $sql->bindParam(1, $this->value);
         $sql->bindParam(2, $this->idPrice);
-        $sql->bindParam(3, $this->idSku);
            
         $result = $sql->execute();
         return $result;
+    }
+
+    public function viewLastIdPrice(){
+        $sql="SELECT MAX(idPrice) AS lastIdPrice FROM price";
+        $query=$this->db->prepare($sql);
+        $query->execute();
+        $lastIdPrice=$query->fetchAll(PDO::FETCH_ASSOC);
+        return $lastIdPrice;
     }
 
 }
