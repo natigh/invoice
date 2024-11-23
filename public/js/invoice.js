@@ -105,15 +105,15 @@ function dataRegister(username, idUser) {
 
             tableBody += "<tr>";
             tableBody += "<td>" + fila + "</td>";
-            tableBody += "<td><input type='text' name='products[code][]' value='" + code + "' disabled/></td>";
-            tableBody += "<td><input type='text' value='" + itemSku.sku + "' disabled /><input type='hidden' name='products[sku][]' value='"+idsku+"' /></td>";
-            tableBody += "<td><input type='text' name='products[quantity][]' value='" + quantity + "' disabled /></td>";
+            tableBody += "<td>" + code + "<input type='hidden' name='products[code][]' value='" + code + "'/></td>";
+            tableBody += "<td>" + itemSku.sku + "<input type='hidden' name='products[sku][]' value='"+idsku+"' /></td>";
+            tableBody += "<td>" + quantity + "<input type='hidden' name='products[quantity][]' value='" + quantity + "' /></td>";
             let formatPrice = parseFloat(price).toLocaleString("en", {
                 style:"currency",
                 currency:"COP"
                 
             })
-            tableBody += "<td><input type='text' value='"+ formatPrice + "' disabled /><input type='hidden' name='products[price][]' value='"+price+"'/></td>";
+            tableBody += "<td>"+ formatPrice + "<input type='hidden' name='products[price][]' value='"+price+"'/></td>";
             let formatTotalItem = totalItem.toLocaleString("en", {
                 style:"currency",
                 currency:"COP"

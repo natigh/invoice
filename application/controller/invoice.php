@@ -90,8 +90,6 @@ class invoice extends controller{
             $productsSku = $_POST['products']['sku'];
             $productsQuantity = $_POST['products']['quantity'];
             $productsPrice = $_POST['products']['price'];
-            /* $this->debugVariable($_POST);
-            die(print_r("holii2222")); */
 
             foreach ($productsSku as $index => $sku) {
                 $this->modelP->__SET('value', $productsPrice[$index]);

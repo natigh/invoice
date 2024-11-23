@@ -114,7 +114,7 @@ CREATE TABLE currency(
 --
 -- Dumping data for table `currency`
 --
-INSERT INTO currency (currency) VALUES ('COP'), ('USD'), ('EUR'), ('GBP'), ('CAD'), ('AUD');
+INSERT INTO currency (currency) VALUES ('COP'), ('USD');
 
 -- --------------------------------------------------------
 --
