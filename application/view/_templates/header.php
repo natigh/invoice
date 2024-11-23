@@ -127,7 +127,7 @@
                         <div class="menu_section">
                             <h3>MENU</h3>
                             <ul class="nav side-menu">
-                                <?php if($_SESSION['rol'] == 'Administrador'): { ?>
+                                <?php if($_SESSION['rol'] == 'Admin'): { ?>
                                 <li><a><span class="material-symbols-outlined" id="usersIcon">
                                             group
                                         </span> USERS MANAGEMENT</a>
