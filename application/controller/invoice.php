@@ -5,6 +5,8 @@ class invoice extends controller{
     private $modelPe;
     private $modelS;
     private $modelU;
+    private $modelII;
+    private $modelP;
 
     public function __construct(){
         $this->modelI = $this->loadModel("mdlInvoice");
@@ -12,6 +14,8 @@ class invoice extends controller{
         $this->modelPe = $this->loadModel("mdlPeople");
         $this->modelS = $this->loadModel("mdlSku");
         $this->modelU = $this->loadModel("mdlUsers");
+        $this->modelII = $this->loadModel("mdlItemInvoice");
+        $this->modelP = $this->loadModel("mdlPrice");
     }
 
     public function viewHistorySales(){
@@ -24,6 +28,34 @@ class invoice extends controller{
         }
 
         $sales=$this->modelI->viewHistorySales();
+
+        $currencyVal = "";
+
+        foreach($sales as &$sale){
+            $items=$this->modelII->getItemsByIdInvoice($sale['idInvoice']);
+
+            $total = 0;
+
+            foreach($items as $item){
+                $price=$this->modelP->getPriceById($item['idPrice']);
+                $this->modelC->__SET('idCurrency', $price['idCurrency']);
+
+                $currency = $this->modelC->getById();
+                $currencyVal = $currency['currency'];
+
+                $subtotal=$item['quantity']*$price['value'];
+                $total += $subtotal;
+
+            }
+
+            $grandTotal = $total*1.19;
+
+            if($currencyVal == "USD") {
+                $grandTotal /= 4200;
+            }
+
+            $sale['grandTotal'] = "$ ".number_format($grandTotal, 2, ",", "."). " ".$currencyVal;
+        }
 
         require_once APP."view/_templates/header.php";
         require_once APP."view/invoices/viewHistorySales.php";
@@ -45,24 +77,48 @@ class invoice extends controller{
             //descomentar para probar
             $invoice=$this->modelI->registerInvoice();
 
+            if($invoice){
+                $lastIdInvoice=$this->modelI->viewLastIdInvoice();
+                $lastIdValueInvoice=null;
+
+                foreach($lastIdInvoice as $value){
+                    $lastIdValueInvoice=$value['lastIdInvoice'];
+                }
+            }
+
             $productsCode = $_POST['products']['code'];
             $productsSku = $_POST['products']['sku'];
             $productsQuantity = $_POST['products']['quantity'];
             $productsPrice = $_POST['products']['price'];
+            /* $this->debugVariable($_POST);
+            die(print_r("holii2222")); */
 
             foreach ($productsSku as $index => $sku) {
-                /*echo '<pre>';
-                print_r("CODE: ".$productsCode[$index]." SKU: ".$sku." QUANTITY: ".$productsQuantity[$index]. " PRICE: ". $productsPrice[$index]);
-                echo '</pre>';*/
-                $this->debugVariable("CODE: ".$productsCode[$index]." SKU: ".$sku." QUANTITY: ".$productsQuantity[$index]. " PRICE: ". $productsPrice[$index]);
-                // Creación del modelo de item invoice para guardar los items de la factura.
-                // hacer el SET de los datos en los atributos de la clase de item invoice (no olvidarse el id de invoice del registro previo)
-                // una vez que tenemos todos los datos de un item, crear el método en el modelo para registrarlos
-            }
-
-            //die("ME MORI -> ADIOS");
+                $this->modelP->__SET('value', $productsPrice[$index]);
+                $this->modelP->__SET('idCurrency', $_POST['selCurrency']);
+                
             
-                header("Location: ". URL . "invoices/viewHistorySales");
+                $price=$this->modelP->registerPrice();
+
+                if($price){
+                    $lastIdPrice=$this->modelP->viewLastIdPrice();
+                    $lastIdValue=null;
+
+                    foreach($lastIdPrice as $value){
+                        $lastIdValue=$value['lastIdPrice'];
+                    }
+                }
+
+                $this->modelII->__SET('code',$productsCode[$index]);
+                $this->modelII->__SET('idSku',$sku);
+                $this->modelII->__SET('quantity',$productsQuantity[$index]);
+                $this->modelII->__SET('idPrice',$lastIdValue);
+                $this->modelII->__SET('idInvoice',$lastIdValueInvoice);
+                
+                $this->modelII->registerItemInvoice();
+            }
+            
+                header("Location: ". URL . "invoice/viewHistorySales");
         }
                 require_once APP."view/_templates/header.php";
                 require_once APP."view/invoices/registerSale.php";

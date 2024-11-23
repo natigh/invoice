@@ -59,5 +59,17 @@ class mdlPrice{
         return $lastIdPrice;
     }
 
+    public function getPriceById($idPrice){
+        $sql = "SELECT * FROM price WHERE idPrice = ?";
+
+        $stm = $this->db->prepare($sql);
+
+        $stm->bindParam(1, $idPrice);
+
+        $stm->execute();
+
+        return $stm -> fetch(PDO::FETCH_ASSOC);
+    }
+
 }
 ?>

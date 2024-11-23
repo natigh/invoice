@@ -13,6 +13,7 @@ class mdlInvoice {
     private $typeInvoice;
     private $remark;
     private $remarkH;
+    private $grandTotal;
 
     public $db;
 
@@ -121,6 +122,14 @@ class mdlInvoice {
 
         if($invoice) $invoice['idInvoice'] = $idInvoice;
         return $invoice;
+    }
+
+    public function viewLastIdInvoice(){
+        $sql="SELECT MAX(idInvoice) AS lastIdInvoice FROM invoice";
+        $query=$this->db->prepare($sql);
+        $query->execute();
+        $lastIdInvoice=$query->fetchAll(PDO::FETCH_ASSOC);
+        return $lastIdInvoice;
     }
 
 }

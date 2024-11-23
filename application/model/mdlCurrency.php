@@ -25,8 +25,17 @@ class mdlCurrency{
         }
     }
 
+    public function getById() {
+        $sql = "SELECT * FROM currency WHERE idCurrency = ?;";
+
+        //preparar la consulta y ejecutarla
+        $query = $this -> db -> prepare($sql);
+        $query -> bindParam(1, $this->idCurrency);
+        $query -> execute();
+        return  $query -> fetch(PDO::FETCH_ASSOC);
+    }
+
     public function currency($currency){
-        //crear consulta
         $sql = "SELECT * FROM currency WHERE currency = ?;";
 
         //preparar la consulta y ejecutarla

@@ -164,7 +164,7 @@
                                                         <th>Sku</th>
                                                         <th>Quantity</th>
                                                         <th>Price unit</th>
-                                                        <th>Total</th>
+                                                        <th>SubTotal</th>
                                                         <th>Delete</th>
                                                     </tr>
                                                 </thead>
@@ -176,7 +176,7 @@
                                                 <div class="form-group col-md-8">
                                                 </div>
                                                 <div class="form-group col-md-1" name="subTotal">
-                                                    <label for="txtSubTotal">SubTotal</label>
+                                                    <label for="txtSubTotal">Total</label>
                                                 </div>
                                                 <div class="form-group col-md-3">
                                                     <input type="text" class="form-control" name="txtSubTotal1"

@@ -42,6 +42,18 @@ class mdlItemInvoice {
         return $result;
     }
 
+    public function getItemsByIdInvoice($idInvoice){
+        $sql = "SELECT * FROM iteminvoice WHERE idInvoice = ?";
+
+        $stm = $this->db->prepare($sql);
+
+        $stm->bindParam(1, $idInvoice);
+
+        $stm->execute();
+
+        return $stm -> fetchAll(PDO::FETCH_ASSOC);
+    }
+
 
 }
 ?>

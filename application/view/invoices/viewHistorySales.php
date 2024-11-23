@@ -44,7 +44,7 @@
                                         <td><?php echo $value['date']; ?></td>
                                         <td><?php echo $value['Customer Name']; ?></td>
                                         <td><?php echo $value['Customer Document']; ?></td>
-                                        <td><?php echo $value['Grand Total']; ?></td>
+                                        <td><?php echo $value['grandTotal']; ?></td>
                                         <td><?php echo $value['user']; ?></td>
                                         <td>
                                             <button type="button" id="btnRemark" name="btnRemark" class="btn btn-primary btn-xs" data-toggle="modal"
