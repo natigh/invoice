@@ -155,7 +155,7 @@ CREATE TABLE typecustomer(
 --
 -- Dumping data for table `typecustomer`
 --
-INSERT INTO typecustomer (typecustomer) VALUES ('PN-Minorista'), ('PN-Mayorista'), ('PN-Extranjera'), ('E-Minorista'), ('E-Mayorista'), ('E-Extranjera');
+INSERT INTO typecustomer (typecustomer) VALUES ('Minorista'), ('Mayorista'), ('Extranjera');
 --
 -- --------------------------------------------------------
 --
@@ -184,7 +184,8 @@ CREATE TABLE invoice(
     FOREIGN KEY (typeCustomer) REFERENCES typecustomer(idTypeCustomer),
     typeInvoice int NOT NULL,
     FOREIGN KEY (typeInvoice) REFERENCES typeinvoice(idTypeInvoice),
-    remark varchar(80)
+    remark varchar(80),
+    remarkH varchar(80)
 );
 --
 -- --------------------------------------------------------
