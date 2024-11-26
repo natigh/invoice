@@ -185,7 +185,9 @@ CREATE TABLE invoice(
     typeInvoice int NOT NULL,
     FOREIGN KEY (typeInvoice) REFERENCES typeinvoice(idTypeInvoice),
     remark varchar(80),
-    remarkH varchar(80)
+    active tinyint NOT NULL,
+    creditNote tinyint NOT NULL
+
 );
 --
 -- --------------------------------------------------------

@@ -69,7 +69,7 @@
     }
 
     #tableItems {
-        min-height: 500px;
+        min-height: 70px;
     }
 
     div#is-relative {

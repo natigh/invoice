@@ -73,6 +73,8 @@ class invoice extends controller{
             $this->modelI->__SET('typeCustomer', $_POST['selTypeCustomer']);
             $this->modelI->__SET('remark', $_POST['txtRemark']);
             $this->modelI->__SET('typeInvoice', $_POST['txtTypeInvoice']);
+            $this->modelI->__SET('active', 1);
+            $this->modelI->__SET('creditNote', 0);
 
             //descomentar para probar
             $invoice=$this->modelI->registerInvoice();

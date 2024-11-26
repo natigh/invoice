@@ -32,7 +32,11 @@
                                         <th>Customer Document</th>
                                         <th>Grand Total</th>
                                         <th>User</th>
-                                        <th>Edit</th>
+                                        <th>Active</th>
+                                        <th>Credit Note</th>
+                                        <?php if($_SESSION['rol'] == 'Admin'): { ?>
+                                        <th>Actions</th>
+                                        <?php } endif; ?>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -47,9 +51,27 @@
                                         <td><?php echo $value['grandTotal']; ?></td>
                                         <td><?php echo $value['user']; ?></td>
                                         <td>
-                                            <button type="button" id="btnRemark" name="btnRemark" class="btn btn-primary btn-xs" data-toggle="modal"
-                                            data-target="#modal-edit" onclick="editRemark('<?php echo $value['idInvoice']; ?>')" ><i class="fa fa-pencil-square-o"  aria-hidden="true"></i></button>
+                                            <?php if($value['active']==1): ?>
+                                            <label class="badge badge-pill badge-success">Active</label>
+                                            <?php else: ?>
+                                            <label class="badge badge-pill badge-danger">Inactive</label>
+                                            <?php endif; ?>
                                         </td>
+                                        <td>
+                                            <?php if($value['creditNote']==1): ?>
+                                            <label class="badge badge-pill badge-success">Active</label>
+                                            <?php else: ?>
+                                            <label class="badge badge-pill badge-danger">Inactive</label>
+                                            <?php endif; ?>
+                                        </td>
+                                        <?php if($_SESSION['rol'] == 'Admin'): { ?>
+                                        <td>
+                                            <button type="button" class="btn btn-warning btn-xs"
+                                                onclick="changeStatus('<?php echo $value['idPerson']; ?>', '<?php echo $value['idUser']; ?>')"><i
+                                                    class="fa fa-exchange" aria-hidden="true"></i>
+                                            </button>
+                                        </td>
+                                        <?php } endif; ?>
                                     </tr>
                                     <?php endforeach; ?>
                                 </tbody>

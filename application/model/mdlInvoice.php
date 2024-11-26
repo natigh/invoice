@@ -14,6 +14,8 @@ class mdlInvoice {
     private $remark;
     private $remarkH;
     private $grandTotal;
+    private $active;
+    private $creditNote;
 
     public $db;
 
@@ -62,8 +64,8 @@ class mdlInvoice {
     }
 
     public function registerInvoice(){
-        $sql="INSERT INTO invoice (code, date, dueDate, idPerson, idUser, typeCustomer, typeInvoice, remark)
-         VALUES(?,?,?,?,?,?,?,?)";
+        $sql="INSERT INTO invoice (code, date, dueDate, idPerson, idUser, typeCustomer, typeInvoice, remark, active, creditNote)
+         VALUES(?,?,?,?,?,?,?,?,?,?)";
 
         $stm=$this->db->prepare($sql);
 
@@ -75,6 +77,8 @@ class mdlInvoice {
         $stm->bindParam(6, $this->typeCustomer);
         $stm->bindParam(7, $this->typeInvoice);
         $stm->bindParam(8, $this->remark);
+        $stm->bindParam(9, $this->active);
+        $stm->bindParam(10, $this->creditNote);
        
         $result=$stm->execute();
         return $result;
