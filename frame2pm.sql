@@ -165,7 +165,7 @@ CREATE TABLE typeinvoice(
     idTypeInvoice int AUTO_INCREMENT NOT NULL PRIMARY KEY,
     typeInvoice varchar(50) NOT NULL
 );
-INSERT INTO typeinvoice (typeinvoice) VALUES ('sales'), ('purchase');
+INSERT INTO typeinvoice (typeinvoice) VALUES ('sales'), ('purchase'), ('creditNote');
 
 -- --------------------------------------------------------
 --
