@@ -32,7 +32,7 @@
                                         <th>Price</th>
                                         <th>Stock</th>
                                         <th>Active</th>
-                                        <?php if($_SESSION['rol'] == 'Administrador'): { ?>
+                                        <?php if($_SESSION['rol'] == 'Admin'): { ?>
                                         <th>Actions</th>
                                         <?php } endif; ?>
                                     </tr>
@@ -55,7 +55,7 @@
                                             <label class="badge badge-pill badge-danger">Inactive</label>
                                             <?php endif; ?>
                                         </td>
-                                        <?php if($_SESSION['rol'] == 'Administrador'): { ?>
+                                        <?php if($_SESSION['rol'] == 'Admin'): { ?>
                                         <td>
                                             <button type="button" class="btn btn-primary btn-xs" data-toggle="modal"
                                                 data-target="#modal-edit"
