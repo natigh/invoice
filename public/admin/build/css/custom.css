@@ -802,7 +802,7 @@
   content: "\e260"; }
 
 .left_col {
-  background: #2A3F54; }
+  background: #50c3a5; }
 
 .container {
   width: 100%;
@@ -899,7 +899,9 @@
   display: none; }
 
 .menu_section {
-  margin-bottom: 35px; }
+  margin-bottom: 35px;
+  padding-left: 10px !important;
+}
 
 .menu_section h3 {
   padding-left: 23px;
@@ -1033,7 +1035,7 @@ body .container.body .right_col {
   float: left;
   background: #2A3F54;
   border-radius: 0;
-  height: 57px;
+  height: 100px;
   padding: 0px; }
 
 @media (max-width: 991px) {
@@ -1413,12 +1415,10 @@ a:hover, a:focus {
   font-size: 22px;
   width: 100%;
   color: #ECF0F1 !important;
-  margin-left: 0 !important;
   line-height: 59px;
   display: block;
   height: 55px;
-  margin: 0;
-  padding-left: 10px; }
+}
 
 .site_title:hover, .site_title:focus {
   text-decoration: none; }

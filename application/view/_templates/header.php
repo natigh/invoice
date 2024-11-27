@@ -52,6 +52,92 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <style>
+    .nav.side-menu>li>a,
+    .nav.child_menu>li>a {
+        color: black;
+        font-weight: 500;
+    }
+
+    .nav.side-menu>li>a,
+    .nav.child_menu>li>a {
+        color: black;
+        font-weight: 500;
+    }
+
+
+    .nav_title {
+        width: 230px;
+        text-align: center;
+        background: #2A3F54;
+        border-radius: 0;
+        height: 100px;
+        padding: 0px;
+    }
+
+    .site_title {
+        background-color: #50c3a5;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        font-weight: 400;
+        font-size: 22px;
+        width: 100%;
+        color: black !important;
+        line-height: 59px;
+        display: block;
+        height: 100px;
+    }
+
+    .nav.side-menu>li.active>a {
+        text-shadow: rgba(0, 0, 0, 0.25) 0 -1px 0;
+        background: -webkit-gradient(linear, left top, left bottom, from(#8fe9d0), to(#8fe9d0)), #8fe9d0;
+        background: linear-gradient(#8fe9d0, #8fe9d0), #8fe9d0;
+        -webkit-box-shadow: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1px 0;
+        box-shadow: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1px 0;
+    }
+
+    .sidebar-footer a {
+        padding: 7px 0 3px;
+        text-align: center;
+        width: 25%;
+        font-size: 17px;
+        display: block;
+        float: left;
+        background: #50c3a5;
+    }
+
+    a {
+        color: black;
+        text-decoration: none;
+    }
+
+    .sidebar-footer {
+        bottom: 0px;
+        clear: both;
+        display: block;
+        padding: 5px 0 0 0;
+        position: fixed;
+        width: 230px;
+        background: #50c3a5;
+    }
+
+    .profile_info h2 {
+        font-size: 14px;
+        color: black;
+        margin: 0;
+        font-weight: 300;
+    }
+
+    .profile_info span {
+        font-size: 13px;
+        line-height: 30px;
+        color: black;
+    }
+
+    .left_col {
+        color: black;
+        background: #50c3a5;
+    }
+
     #profileIcon {
         font-size: 7em;
     }
@@ -86,6 +172,7 @@
         user-select: none;
         cursor: pointer;
     }
+
     #txtRemark {
         resize: none;
     }
@@ -98,9 +185,8 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><span class="material-symbols-outlined">
-                                receipt_long
-                            </span><span>Invoice</span></a>
+                        <a href="index.html" class="site_title"><img src="<?php echo URL; ?>img/logo.jpg" alt="logo"
+                                height="100"></a>
                     </div>
 
                     <div class="clearfix"></div>
@@ -125,12 +211,12 @@
                     <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
-                            <h3>MENU</h3>
+                            <h2>MENU</h2>
                             <ul class="nav side-menu">
                                 <?php if($_SESSION['rol'] == 'Admin'): { ?>
                                 <li><a><span class="material-symbols-outlined" id="usersIcon">
                                             group
-                                        </span> USERS MANAGEMENT</a>
+                                        </span> USERS MANAGEMENT<span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="<?php echo URL; ?>user/viewUsers">View Users</a></li>
                                         <li><a href="<?php echo URL; ?>user/registerUser">Register User</a>
@@ -158,69 +244,16 @@
                                                 Invoices</a></li>
                                         <li><a href="<?php echo URL; ?>invoice/viewHistoryPurchases">History Purchase
                                                 Invoices</a></li>
+                                        <li><a href="<?php echo URL; ?>invoice/creditNote">Credit Notes</a></li>
                                     </ul>
                                 </li>
-                                <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span
-                                            class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="chartjs.html">Chart JS</a></li>
-                                        <li><a href="chartjs2.html">Chart JS2</a></li>
-                                        <li><a href="morisjs.html">Moris JS</a></li>
-                                        <li><a href="echarts.html">ECharts</a></li>
-                                        <li><a href="other_charts.html">Other Charts</a></li>
-                                    </ul>
-                                </li>
-                                <li><a><i class="fa fa-clone"></i>Layouts <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
-                                        <li><a href="fixed_footer.html">Fixed Footer</a></li>
-                                    </ul>
-                                </li>
+
                             </ul>
                         </div>
                         <div class="menu_section">
-                            <h3>Live On</h3>
+                            <h3></h3>
                             <ul class="nav side-menu">
-                                <li><a><i class="fa fa-bug"></i> Additional Pages <span
-                                            class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="e_commerce.html">E-commerce</a></li>
-                                        <li><a href="projects.html">Projects</a></li>
-                                        <li><a href="project_detail.html">Project Detail</a></li>
-                                        <li><a href="contacts.html">Contacts</a></li>
-                                        <li><a href="profile.html">Profile</a></li>
-                                    </ul>
-                                </li>
-                                <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="page_403.html">403 Error</a></li>
-                                        <li><a href="page_404.html">404 Error</a></li>
-                                        <li><a href="page_500.html">500 Error</a></li>
-                                        <li><a href="plain_page.html">Plain Page</a></li>
-                                        <li><a href="login.html">Login Page</a></li>
-                                        <li><a href="pricing_tables.html">Pricing Tables</a></li>
-                                    </ul>
-                                </li>
-                                <li><a><i class="fa fa-sitemap"></i> Multilevel Menu <span
-                                            class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="#level1_1">Level One</a>
-                                        <li><a>Level One<span class="fa fa-chevron-down"></span></a>
-                                            <ul class="nav child_menu">
-                                                <li class="sub_menu"><a href="level2.html">Level Two</a>
-                                                </li>
-                                                <li><a href="#level2_1">Level Two</a>
-                                                </li>
-                                                <li><a href="#level2_2">Level Two</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#level1_2">Level One</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span
-                                            class="label label-success pull-right">Coming Soon</span></a></li>
+
                             </ul>
                         </div>
 
@@ -229,15 +262,6 @@
 
                     <!-- /menu footer buttons -->
                     <div class="sidebar-footer hidden-small">
-                        <a data-toggle="tooltip" data-placement="top" title="Settings">
-                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Lock">
-                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-                        </a>
                         <a data-toggle="tooltip" data-placement="top" title="Logout"
                             href="<?php echo URL; ?>user/logOut">
                             <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
