@@ -238,11 +238,7 @@
                                     <ul class="nav child_menu">
                                         <li><a href="<?php echo URL; ?>invoice/registerSale">Register Sales Invoice</a>
                                         </li>
-                                        <li><a href="<?php echo URL; ?>invoice/registerPurchase">Register Purchase
-                                                Invoice</a></li>
                                         <li><a href="<?php echo URL; ?>invoice/viewHistorySales">History Sales
-                                                Invoices</a></li>
-                                        <li><a href="<?php echo URL; ?>invoice/viewHistoryPurchases">History Purchase
                                                 Invoices</a></li>
                                         <li><a href="<?php echo URL; ?>invoice/creditNote">Credit Notes</a></li>
                                     </ul>

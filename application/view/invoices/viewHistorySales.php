@@ -66,12 +66,22 @@
                                         </td>
                                         <?php if($_SESSION['rol'] == 'Admin'): { ?>
                                         <td>
+                                            <?php if($value['active'] == 1 && $value['creditNote'] == 0): { ?>
                                             <button type="button" class="btn btn-warning btn-xs"
-                                                onclick="changeStatus('<?php echo $value['idPerson']; ?>', '<?php echo $value['idUser']; ?>')"><i
+                                                onclick="changeStatusInvoice('<?php echo $value['idInvoice']; ?>', '<?php echo $value['active']; ?>','<?php echo $value['creditNote']; ?>')"><i
                                                     class="fa fa-exchange" aria-hidden="true"></i>
                                             </button>
+                                            <?php } endif; ?>
+                                            <?php if($value['active'] == 0 && $value['creditNote'] == 1): { ?>
+                                            <button type="button" class="btn btn-primary btn-xss" data-toggle="modal"
+                                                data-target="#modal-edit"
+                                                onclick="creditNote('<?php echo $value['idInvoice']; ?>')"><i
+                                                    class="fa fa-money" aria-hidden="true"></i>
+                                            </button>
+                                            <?php } endif; ?>
                                         </td>
                                         <?php } endif; ?>
+
                                     </tr>
                                     <?php endforeach; ?>
                                 </tbody>
@@ -92,14 +102,100 @@
                         </div>
                         <div class="modal-body">
                             <form method="post">
-                            <input type="hidden" name="idInvoice" id="idInvoice" />
+                                <input type="hidden" name="idInvoiceH" id="idInvoiceH" />
+                                <input type="hidden" name="idPersonH" id="idPersonH" />
+                                <input type="hidden" name="selTypeCustomerH" id="selTypeCustomerH" />
+                                <input type="hidden" name="typeInvoiceH" id="typeInvoiceH" />
+                                <input type="hidden" name="selCurrencyH" id="selCurrencyH" />
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label class="col-form-label col-md-3 col-sm-3 label-align"
-                                            for="txtRemarkH">Remark</label>
+                                            for="codeInvoice">Code</label>
                                         <div class="col-md-6 col-sm-6">
-                                            <textarea id="txtRemarkH" name="txtRemarkH" cols="100" rows="5"
-                                                placeholder="Remark"></textarea>
+                                            <label class="col-form-label" id="codeInvoice"></label>
+                                            <input type="hidden" id="codeInvoiceH" name="codeInvoiceH" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align"
+                                            for="dateInvoice">Fecha de Facturación</label>
+                                        <div class="col-md-6 col-sm-6">
+                                            <label class="col-form-label" id="dateInvoice"></label>
+                                            <input type="hidden" id="dateInvoiceH" name="dateInvoiceH" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align"
+                                            for="today">Fecha de Devolución</label>
+                                        <div class="col-md-6 col-sm-6">
+                                            <label class="col-form-label" id="today"></label>
+                                            <input type="hidden" id="todayH" name="todayH" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align"
+                                            for="customerName">Customer Name</label>
+                                        <div class="col-md-6 col-sm-6">
+                                            <label class="col-form-label" id="customerName"></label>
+                                            <input type="hidden" id="customerNameH" name="customerNameH" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align"
+                                            for="customerDoc">Customer Document</label>
+                                        <div class="col-md-6 col-sm-6">
+                                            <label class="col-form-label" id="customerDoc"></label>
+                                            <input type="hidden" id="customerDocH" name="customerDocH" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align"
+                                            for="user">User</label>
+                                        <div class="col-md-6 col-sm-6">
+                                            <label class="col-form-label"
+                                                id="user"><?php echo $_SESSION ['username'] ?></label>
+                                            <input type="hidden" id="userH" name="userH"
+                                                value="<?php echo $_SESSION ['idUser'] ?>" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <table class="table" id="tableItems">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Cod. Sku</th>
+                                                    <th>Sku</th>
+                                                    <th>Quantity</th>
+                                                    <th>Price</th>
+                                                    <th>Refund</th>
+                                                    <th>Subtotal</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody id="salesDetail">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align"
+                                            for="total">Total</label>
+                                        <div class="col-md-6 col-sm-6">
+                                            <label class="col-form-label" id="total">0</label>
+                                            <input type="hidden" id="totalH" />
                                         </div>
                                     </div>
                                 </div>

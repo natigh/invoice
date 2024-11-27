@@ -96,29 +96,28 @@ class mdlInvoice {
         return $stm -> fetch(PDO::FETCH_ASSOC);
     }
 
-    public function viewHistorySales(){
-        $sql = "SELECT I.*, CONCAT(P.name, ' ', P.lastname) AS 'Customer Name',  P.document AS 'Customer Document', U.username AS 'user' FROM invoice AS I INNER JOIN person AS P ON P.idPerson = I.idPerson INNER JOIN users AS U ON U.idUser = I.idUser";
+    public function viewHistorySales($idTypeInvoice){
+        $sql = "SELECT I.*, CONCAT(P.name, ' ', P.lastname) AS 'Customer Name',  P.document AS 'Customer Document', U.username AS 'user' FROM invoice AS I INNER JOIN person AS P ON P.idPerson = I.idPerson INNER JOIN users AS U ON U.idUser = I.idUser WHERE I.typeInvoice = ?";
 
         $stm= $this->db->prepare($sql);
+        $stm -> bindParam(1, $idTypeInvoice);
         $stm->execute();
         $sales=$stm->fetchAll(PDO::FETCH_ASSOC);
         return $sales;
     }
 
-    public function updateRemarkH(){
+    /* public function updateRemarkH(){
         $sql= $this->db->prepare("UPDATE invoice SET remarkH = ? WHERE idInvoice = ?");
 
         $sql->bindParam(1, $this->remarkH);
         $sql->bindParam(2, $this->idInvoice);
         $result = $sql->execute();
         return $result;
-    }
+    } */
 
     public function invoiceId($idInvoice){
-        //crear consulta
-        $sql = "SELECT I.idInvoice, I.remarkH FROM invoice AS I WHERE I.idInvoice = ?;";
+        $sql = "SELECT I.*, P.document, CONCAT(P.name, ' ', P.lastname) AS 'name' FROM invoice AS I INNER JOIN person AS P ON I.idPerson = P.idPerson WHERE I.idInvoice = ?;";
 
-        //preparar la consulta y ejecutarla
         $query = $this -> db -> prepare($sql);
         $query -> bindParam(1, $idInvoice);
         $query -> execute();
@@ -134,6 +133,27 @@ class mdlInvoice {
         $query->execute();
         $lastIdInvoice=$query->fetchAll(PDO::FETCH_ASSOC);
         return $lastIdInvoice;
+    }
+
+    public function changeInvoiceStatus($id){
+        //crear la consulta
+        $sql = "UPDATE invoice SET active = (CASE WHEN active = 1 THEN 0 ELSE 1 END), creditNote = (CASE WHEN creditNote = 0 THEN 1 ELSE 0 END) WHERE idInvoice = ?;";
+
+        $query = $this->db->prepare($sql);
+        $query->bindParam(1, $id);
+
+        return $query -> execute();
+    }
+
+    public function updateInvoiceStatus(){
+        $sql= $this->db->prepare("UPDATE invoice SET active = ?, creditNote = ? WHERE idInvoice = ?");
+
+        $sql->bindParam(1, $this->active);
+        $sql->bindParam(2, $this->creditNote);
+        $sql->bindParam(3, $this->idInvoice);
+        
+        $result = $sql->execute();
+        return $result;
     }
 
 }

@@ -175,7 +175,7 @@ CREATE TABLE invoice(
     idInvoice int AUTO_INCREMENT NOT NULL PRIMARY KEY,
     code int NOT NULL,
     date DATE NOT NULL,
-    dueDate DATE NOT NULL,
+    dueDate DATE NULL,
     idPerson int NOT NULL,
     FOREIGN KEY (idPerson) REFERENCES person(idPerson),
     idUser int NOT NULL,

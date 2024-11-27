@@ -43,7 +43,7 @@ class mdlItemInvoice {
     }
 
     public function getItemsByIdInvoice($idInvoice){
-        $sql = "SELECT * FROM iteminvoice WHERE idInvoice = ?";
+        $sql = "SELECT II.*, S.sku, P.value, P.idCurrency FROM iteminvoice AS II INNER JOIN sku AS S ON II.idSku = S.idSku INNER JOIN price AS P ON II.idPrice = P.idPrice WHERE idInvoice = ?";
 
         $stm = $this->db->prepare($sql);
 
@@ -53,7 +53,5 @@ class mdlItemInvoice {
 
         return $stm -> fetchAll(PDO::FETCH_ASSOC);
     }
-
-
 }
 ?>

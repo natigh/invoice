@@ -139,5 +139,31 @@ class mdlSku{
         // Retornar los roles
         return $stm->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getByIdandInvoiceId($idSku, $invoiceId) {
+        //crear la consulta
+        $sql="SELECT S.* FROM sku as S INNER JOIN iteminvoice AS II ON S.idSku = II.idSku WHERE S.idSku = ? AND II.idInvoice = ?";
+
+        // Preparar la consulta
+        $stm = $this->db->prepare($sql);
+        $stm->bindParam(1, $idSku);
+        $stm->bindParam(2, $invoiceId);
+    
+        // Ejecutar la consulta
+        $stm->execute();
+    
+        // Retornar los roles
+        return $stm->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function updateStock($idSku, $stock){
+        $sql= $this->db->prepare("UPDATE sku SET stock = ? WHERE idSku = ?");
+
+        $sql->bindParam(1, $stock);
+        $sql->bindParam(2, $idSku);
+        
+        $result = $sql->execute();
+        return $result;
+    }
 }
 ?>
