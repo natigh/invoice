@@ -49,13 +49,15 @@
                     
                 </div>
                 <div id="derecho">
+                    <div>
+                        <img src="<?php echo URL; ?>img/logo.jpg" alt="logo" height="100">
+                    </div>
                     <div class="titulo">
                         Bienvenido a Invoice
                     </div>
                     <hr>
                     <div class="pie-form">
                         <a href="#">¿Perdiste tu contraseña?</a>
-                        <a href="#">¿No tienes Cuenta? Registrate</a>
                         <hr>
                     </div>
                 </div>
