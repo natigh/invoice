@@ -544,7 +544,7 @@ video {
 }
 
 .h-12{
-  height: 3rem;
+  height: 7rem;
 }
 
 .w-1\/2{
