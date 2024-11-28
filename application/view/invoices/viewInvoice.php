@@ -918,7 +918,7 @@ video {
 
                                 <div class="px-14 py-10 text-sm text-neutral-700">
                                     <p class="text-main font-bold">Notes</p>
-                                    <p class="italic"></p>
+                                    <p class="italic"><?php echo $invoice['remark'] ?></p>
                                     </dvi>
 
                                     <footer
