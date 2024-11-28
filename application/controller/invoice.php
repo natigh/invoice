@@ -263,7 +263,7 @@ class invoice extends controller{
         $invoice=$this->modelI->viewInvoiceId($_GET['invoice_id']);
         $invoice['items']=$this->modelII->getItemsByIdInvoice($_GET['invoice_id']);
 
-        require_once APP."view/_templates/header.php";
+        //require_once APP."view/_templates/header.php";
         require_once APP."view/invoices/viewInvoice.php";
         require_once APP."view/_templates/footer.php";
     }
@@ -295,7 +295,7 @@ class invoice extends controller{
         $invoice=$this->modelI->viewInvoiceId($_GET['invoice_id']);
         $invoice['items']=$this->modelII->getItemsByIdInvoice($_GET['invoice_id']);
 
-        require_once APP."view/_templates/header.php";
+        //require_once APP."view/_templates/header.php";
         require_once APP."view/invoices/viewInvoice.php";
         require_once APP."view/_templates/footer.php";
     }

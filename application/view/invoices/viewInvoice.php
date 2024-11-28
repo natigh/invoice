@@ -716,9 +716,6 @@ video {
 }
 
 </style>
-<?php
-    print_r($invoice);
-?>
 <div class="row">
     <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
@@ -830,19 +827,31 @@ video {
                                             <?php 
                                             $netTotal=0;
                                                 foreach($invoice['items']as $index=>$item):
-                                                    $netTotal += $invoice['items'][$index]['value'] * $invoice['items'][$index]['quantity'];
+                                                    $price = $invoice['items'][$index]['value'];
+                                                    $quantity = $invoice['items'][$index]['quantity'];
+                                                    
+                                                    $subtotal = $price * $quantity;
+                                                    $netTotal += $subtotal;
                                                     $tax = $netTotal*0.19;
                                                     $Total = $netTotal + $tax;
+                                                    
+                                                    $priceFormat = "$ ".number_format($price, 2, ",", "."). " COP";
+                                                    $subtotalFormat = "$ ".number_format($subtotal, 2, ",", "."). " COP";
+
                                             ?>
                                                 <tr>
                                                 <td class="border-b py-3 pl-3"><?php echo $index+1; ?></td>
                                                 <td class="border-b py-3 pl-2"><?php echo $invoice['items'][$index]['code'] ?></td>
                                                 <td class="border-b py-3 pl-2"><?php echo $invoice['items'][$index]['sku'] ?></td>
-                                                <td class="border-b py-3 pl-2"><?php echo $invoice['items'][$index]['value'] ?></td>
-                                                <td class="border-b py-3 pl-2"><?php echo $invoice['items'][$index]['quantity'] ?></td>
-                                                <td class="border-b py-3 pl-2 pr-3 text-right"><?php echo $invoice['items'][$index]['value'] * $invoice['items'][$index]['quantity'] ?></td>
+                                                <td class="border-b py-3 pl-2"><?php echo $priceFormat ?></td>
+                                                <td class="border-b py-3 pl-2"><?php echo $quantity ?></td>
+                                                <td class="border-b py-3 pl-2 pr-3 text-right"><?php echo $subtotalFormat ?></td>
                                             </tr>
-                                            <?php endforeach; ?>
+                                            <?php endforeach;
+                                                $netTotalFormat = "$ ".number_format($netTotal, 2, ",", "."). " COP";
+                                                $taxFormat = "$ ".number_format($tax, 2, ",", "."). " COP";
+                                                $totalFormat = "$ ".number_format($Total, 2, ",", "."). " COP";
+                                            ?>
                                             <tr>
                                                 <td colspan="7">
                                                     <table class="w-full border-collapse border-spacing-0">
@@ -862,7 +871,7 @@ video {
                                                                                 <td class="border-b p-3 text-right">
                                                                                     <div
                                                                                         class="whitespace-nowrap font-bold text-main">
-                                                                                        <?php echo $netTotal ?></div>
+                                                                                        <?php echo $netTotalFormat ?></div>
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
@@ -873,7 +882,7 @@ video {
                                                                                 <td class="p-3 text-right">
                                                                                     <div
                                                                                         class="whitespace-nowrap font-bold text-main">
-                                                                                        <?php echo $tax ?></div>
+                                                                                        <?php echo $taxFormat ?></div>
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
@@ -885,7 +894,7 @@ video {
                                                                                 <td class="bg-main p-3 text-right">
                                                                                     <div
                                                                                         class="whitespace-nowrap font-bold text-white">
-                                                                                        <?php echo $Total ?></div>
+                                                                                        <?php echo $totalFormat ?></div>
                                                                                 </td>
                                                                             </tr>
                                                                         </tbody>
