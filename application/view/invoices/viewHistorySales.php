@@ -34,9 +34,7 @@
                                         <th>User</th>
                                         <th>Active</th>
                                         <th>Credit Note</th>
-                                        <?php if($_SESSION['rol'] == 'Admin'): { ?>
                                         <th>Actions</th>
-                                        <?php } endif; ?>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -50,6 +48,7 @@
                                         <td><?php echo $value['Customer Document']; ?></td>
                                         <td><?php echo $value['grandTotal']; ?></td>
                                         <td><?php echo $value['user']; ?></td>
+                                        
                                         <td>
                                             <?php if($value['active']==1): ?>
                                             <label class="badge badge-pill badge-success">Active</label>
@@ -64,8 +63,12 @@
                                             <label class="badge badge-pill badge-danger">Inactive</label>
                                             <?php endif; ?>
                                         </td>
-                                        <?php if($_SESSION['rol'] == 'Admin'): { ?>
+                                        
                                         <td>
+                                            <?php if($value['active'] == 1): { ?>
+                                                <a href="<?php echo URL; ?>invoice/invoiceHistorySales?invoice_id=<?php echo $value['idInvoice']; ?>"><i class="fa fa-print" aria-hidden="true"></i></a>
+                                            <?php } endif; ?>
+                                        <?php if($_SESSION['rol'] == 'Admin'): { ?>
                                             <?php if($value['active'] == 1 && $value['creditNote'] == 0): { ?>
                                             <button type="button" class="btn btn-warning btn-xs"
                                                 onclick="changeStatusInvoice('<?php echo $value['idInvoice']; ?>', '<?php echo $value['active']; ?>','<?php echo $value['creditNote']; ?>')"><i
@@ -81,7 +84,7 @@
                                             <?php } endif; ?>
                                         </td>
                                         <?php } endif; ?>
-
+                                                    
                                     </tr>
                                     <?php endforeach; ?>
                                 </tbody>

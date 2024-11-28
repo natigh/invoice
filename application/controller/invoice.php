@@ -259,6 +259,15 @@ class invoice extends controller{
     }
     
 
+    public function viewInvoice(){
+        $invoice=$this->modelI->viewInvoiceId($_GET['invoice_id']);
+        $invoice['items']=$this->modelII->getItemsByIdInvoice($_GET['invoice_id']);
+
+        require_once APP."view/_templates/header.php";
+        require_once APP."view/invoices/viewInvoice.php";
+        require_once APP."view/_templates/footer.php";
+    }
+
     
 
     public function viewHistorySalesById(){
@@ -280,6 +289,15 @@ class invoice extends controller{
         $invoice['typeInvoice'] = $typeInvoice['idTypeInvoice'];
 
         echo json_encode($invoice);
+    }
+
+    public function invoiceHistorySales(){
+        $invoice=$this->modelI->viewInvoiceId($_GET['invoice_id']);
+        $invoice['items']=$this->modelII->getItemsByIdInvoice($_GET['invoice_id']);
+
+        require_once APP."view/_templates/header.php";
+        require_once APP."view/invoices/viewInvoice.php";
+        require_once APP."view/_templates/footer.php";
     }
 }
 

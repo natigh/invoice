@@ -32,6 +32,8 @@
                                         <th>Customer Document</th>
                                         <th>Grand Total</th>
                                         <th>User</th>
+                                        <th>Action</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -45,6 +47,9 @@
                                         <td><?php echo $value['Customer Document']; ?></td>
                                         <td><?php echo $value['grandTotal']; ?></td>
                                         <td><?php echo $value['user']; ?></td>
+                                        <td>
+                                            <a href="<?php echo URL; ?>invoice/viewInvoice?invoice_id=<?php echo $value['idInvoice']; ?>"><i class="fa fa-print" aria-hidden="true"></i></a>
+                                        </td>
                                     </tr>
                                     <?php endforeach; ?>
                                 </tbody>

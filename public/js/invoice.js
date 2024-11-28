@@ -433,8 +433,23 @@ function creditNote(idInvoice) {
         console.log("ERROR? : ", error);
         Swal.fire("Wrong to change Status", " ", "Error")
     })
-    
+}
 
+function viewInvoice(idInvoice){
+    $.ajax({
+        type: "post",
+        //llamar la constante creada en header con el enrutamiento
+        //url: "nombre_del_controller/metodo"
+        url: url + "invoice/viewInvoice",
+        data: { idInvoice }
+    }).done(function(result){
+        console.log("DONE? : ", result);
+        
+        
+    }).fail(function(error){
+        console.log("ERROR? : ", error);
+        Swal.fire("Wrong to change Status", " ", "Error")
+    })
 }
 
 

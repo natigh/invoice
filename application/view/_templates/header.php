@@ -64,6 +64,10 @@
         font-weight: 500;
     }
 
+    .profile_pic{
+        height: 100px;
+    }
+
 
     .nav_title {
         width: 230px;

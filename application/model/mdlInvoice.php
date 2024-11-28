@@ -156,5 +156,17 @@ class mdlInvoice {
         return $result;
     }
 
+    public function viewInvoiceId($idInvoice){
+        $sql = "SELECT I.*, P.*, CONCAT(P.name, ' ', P.lastname) AS 'name' FROM invoice AS I INNER JOIN person AS P ON I.idPerson = P.idPerson WHERE I.idInvoice = ?;";
+
+        $query = $this -> db -> prepare($sql);
+        $query -> bindParam(1, $idInvoice);
+        $query -> execute();
+        $invoice = $query -> fetch(PDO::FETCH_ASSOC); 
+
+        if($invoice) $invoice['idInvoice'] = $idInvoice;
+        return $invoice;
+    }
+
 }
 ?>
