@@ -55,11 +55,7 @@
                     <div class="titulo">
                         Bienvenido a Invoice
                     </div>
-                    <hr>
-                    <div class="pie-form">
-                        <a href="#">¿Perdiste tu contraseña?</a>
-                        <hr>
-                    </div>
+                    
                 </div>
             </div>
         </div>
