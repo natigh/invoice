@@ -52,7 +52,7 @@ CREATE TABLE typedocument(
 );
 
 --
--- Dumping data for table `typedocument`
+ALTER TABLE typedocument ADD UNIQUE `uniqueData` (`typeDocument`);
 --
 
 INSERT INTO typedocument (typeDocument) VALUES ('Cèdula de ciudadania'), ('Cèdula de Extanjeria'), ('Pasaporte'), ('NIT'), ('CUIT');
@@ -77,6 +77,8 @@ CREATE TABLE person(
     active tinyint NOT NULL
 );
 
+ALTER TABLE person ADD UNIQUE `uniqueData` (`document`, `email`);
+
 INSERT INTO person (name, lastname, typedocument, document, phone, Address, email, birthdate, active) VALUES ('Natalia', 'Garcia', 1, 123654, 9547845123, 'calle 1 # 2- 3', 'natag@yahoo.com', '1994-11-13', 1);
 
 
@@ -99,6 +101,8 @@ CREATE TABLE users(
     active tinyint NOT NULL
 );
 
+ALTER TABLE users ADD UNIQUE `uniqueData` (`username`);
+
 INSERT INTO users (username, PASSWORD, idRol, idPerson, active) VALUES('natag', 'asdfg', 1, 1, 1);
 
 -- --------------------------------------------------------
@@ -112,7 +116,7 @@ CREATE TABLE currency(
 );
 
 --
--- Dumping data for table `currency`
+ALTER TABLE currency ADD UNIQUE `uniqueData` (`currency`);
 --
 INSERT INTO currency (currency) VALUES ('COP'), ('USD');
 
@@ -143,6 +147,8 @@ CREATE TABLE sku(
     active tinyint NOT NULL
 );
 
+ALTER TABLE sku ADD UNIQUE `uniqueData` (`code`);
+
 --
 -- --------------------------------------------------------
 --Table structure for table `typecustomer`
@@ -153,7 +159,7 @@ CREATE TABLE typecustomer(
 );
 
 --
--- Dumping data for table `typecustomer`
+ALTER TABLE typecustomer ADD UNIQUE `uniqueData` (`typeCustomer`);
 --
 INSERT INTO typecustomer (typecustomer) VALUES ('Minorista'), ('Mayorista'), ('Extranjera');
 --
@@ -165,6 +171,9 @@ CREATE TABLE typeinvoice(
     idTypeInvoice int AUTO_INCREMENT NOT NULL PRIMARY KEY,
     typeInvoice varchar(50) NOT NULL
 );
+
+ALTER TABLE typeinvoice ADD UNIQUE `uniqueData` (`typeInvoice`);
+
 INSERT INTO typeinvoice (typeinvoice) VALUES ('sales'), ('purchase'), ('creditNote');
 
 -- --------------------------------------------------------
