@@ -116,7 +116,6 @@ class mdlUsers extends mdlPeople{
         $query -> execute();
         $person = $query -> fetch(PDO::FETCH_ASSOC);
 
-        // TODO: esto está feo, averiguar que pasa. Porque cuando una persona no tiene usuario, el idPerson no lo devuelve
         if($person) $person['idPerson'] = $id; 
 
         return $person;
